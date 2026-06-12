@@ -4,919 +4,656 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PAPPAGALLO — Visual Stories. No Words Needed.</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2220%22%20fill%3D%22%2306060a%22%2F%3E%3Cg%20transform%3D%22translate%2850%2050%29%20scale%280.1105%29%20translate%28-364%20-344%29%22%3E%3Cpath%20fill%3D%22%23b8975a%22%20d%3D%22M39%200Q62%201%2098.5%202.0Q135%203%20171%203Q219%203%20262.5%202.0Q306%201%20324%201Q451%201%20514.0%2056.0Q577%20111%20577%20198Q577%20234%20564.5%20273.5Q552%20313%20521.0%20346.5Q490%20380%20437.0%20401.0Q384%20422%20302%20422H204V402H292Q359%20402%20394.5%20375.0Q430%20348%20442.5%20304.0Q455%20260%20455%20209Q455%20114%20421.0%2067.0Q387%2020%20303%2020Q260%2020%20246.5%2037.0Q233%2054%20233%20106V600Q233%20637%20241.0%20655.5Q249%20674%20271.0%20680.0Q293%20686%20336%20687V708Q309%20706%20266.0%20705.5Q223%20705%20177%20705Q137%20705%20100.5%20705.5Q64%20706%2039%20708V688Q73%20686%2090.0%20680.0Q107%20674%20112.5%20656.0Q118%20638%20118%20602V106Q118%2069%20112.5%2051.5Q107%2034%2089.5%2027.5Q72%2021%2039%2020Z%22%2F%3E%3Cpath%20fill%3D%22%23b8975a%22%20d%3D%22M425%20211L305%20142L305%20280Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
+<meta name="description" content="Rome-based filmmaker and videomaker. Ten years shooting for international broadcasters — RSI, SRF, RAI, RTL4, Antena 3. Visual storytelling that travels the world.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #06060a;
-  --bg2: #0c0c12;
-  --gold: #b8975a;
-  --gold-light: #d4b07a;
-  --gold-dim: rgba(184,151,90,0.15);
-  --text: #ede8e0;
-  --muted: #5c5650;
-  --border: rgba(255,255,255,0.06);
-  --serif: 'Playfair Display', serif;
-  --sans: 'Outfit', sans-serif;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  font-weight: 300;
-  overflow-x: hidden;
-  cursor: none;
-}
-
-
-
-/* CUSTOM CURSOR */
-.cursor {
-  position: fixed;
-  width: 8px; height: 8px;
-  background: var(--gold);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  mix-blend-mode: difference;
-}
-.cursor-ring {
-  position: fixed;
-  width: 36px; height: 36px;
-  border: 1px solid rgba(184,151,90,0.5);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.12s ease-out;
-}
-
-/* NOISE OVERLAY */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0.4;
-}
-
-/* NAV */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 500;
-  padding: 32px 56px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  mix-blend-mode: normal;
-}
-
-nav::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(6,6,10,0.9) 0%, transparent 100%);
-  z-index: -1;
-  pointer-events: none;
-}
-
-.nav-logo {
-  font-family: var(--serif);
-  font-size: 17px;
-  font-weight: 400;
-  letter-spacing: 8px;
-  text-transform: uppercase;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.nav-right { display: flex; align-items: center; gap: 48px; }
-
-.nav-links {
-  display: flex; gap: 36px; list-style: none;
-}
-
-.nav-links a {
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.4s;
-  font-weight: 300;
-}
-.nav-links a:hover { color: var(--gold); }
-
-.lang-switcher { display: flex; gap: 12px; }
-.lang-btn {
-  background: none; border: none;
-  font-family: var(--sans); font-size: 10px;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--muted); cursor: pointer;
-  padding: 0; transition: color 0.3s;
-  font-weight: 300;
-}
-.lang-btn.active, .lang-btn:hover { color: var(--gold-light); }
-
-/* HERO */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: 1fr auto;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-ambient {
-  position: absolute; inset: 0; pointer-events: none;
-}
-
-.hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.12;
-}
-.hero-orb-1 {
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, #b8975a 0%, transparent 70%);
-  top: -200px; right: -100px;
-  animation: drift1 20s ease-in-out infinite alternate;
-}
-.hero-orb-2 {
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, #4a3a6a 0%, transparent 70%);
-  bottom: -100px; left: -100px;
-  animation: drift2 25s ease-in-out infinite alternate;
-}
-
-@keyframes drift1 { to { transform: translate(-80px, 80px) scale(1.1); } }
-@keyframes drift2 { to { transform: translate(60px, -60px) scale(0.9); } }
-
-.hero-content {
-  padding: 160px 56px 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  position: relative;
-  z-index: 2;
-}
-
-.hero-label {
-  font-size: 10px;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  opacity: 0;
-  animation: fadeUp 1s ease 0.3s forwards;
-}
-.hero-label::before {
-  content: '';
-  width: 48px; height: 1px;
-  background: var(--gold); opacity: 0.5;
-}
-
-.hero-label {
-  text-shadow: 0 1px 8px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.5);
-}
-.hero-headline {
-  font-family: var(--serif);
-  font-size: clamp(72px, 11vw, 160px);
-  font-weight: 400;
-  line-height: 0.88;
-  letter-spacing: -3px;
-  margin-bottom: 0;
-  opacity: 0;
-  animation: fadeUp 1s ease 0.5s forwards;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.6);
-}
-
-.hero-headline em {
-  font-style: italic;
-  color: var(--gold);
-  display: block;
-}
-
-.hero-bottom {
-  padding: 48px 56px 64px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  position: relative;
-  z-index: 2;
-}
-
-.hero-sub {
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-  line-height: 2.2;
-  opacity: 0;
-  animation: fadeUp 1s ease 0.7s forwards;
-  text-shadow: 0 1px 8px rgba(0,0,0,0.9);
-}
-
-.hero-cta {
-  opacity: 0;
-  animation: fadeUp 1s ease 0.9s forwards;
-}
-
-.btn-outline {
-  display: inline-block;
-  border: 1px solid rgba(184,151,90,0.4);
-  color: var(--gold);
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  padding: 16px 32px;
-  text-decoration: none;
-  transition: all 0.4s;
-  font-weight: 300;
-}
-.btn-outline:hover {
-  background: var(--gold-dim);
-  border-color: var(--gold);
-}
-
-.hero-scroll-indicator {
-  position: absolute;
-  bottom: 0; left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding-bottom: 32px;
-  opacity: 0;
-  animation: fadeIn 1s ease 1.4s forwards;
-}
-
-.scroll-line {
-  width: 1px; height: 64px;
-  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-  animation: scrollPulse 2.5s ease-in-out infinite;
-}
-@keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
-  50% { opacity: 0.8; transform: scaleY(1.1); }
-}
-
-.scroll-text {
-  font-size: 8px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--muted);
-  writing-mode: vertical-lr;
-}
-
-/* DIVIDER */
-.divider {
-  height: 1px;
-  background: var(--border);
-  margin: 0 56px;
-  position: relative;
-  overflow: visible;
-}
-.divider::after {
-  content: '';
-  position: absolute;
-  left: 0; top: 0;
-  height: 1px;
-  width: 80px;
-  background: linear-gradient(to right, var(--gold), transparent);
-}
-
-/* SHOWREEL */
-.showreel {
-  padding: 120px 56px;
-  position: relative;
-}
-
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 20px;
-  margin-bottom: 52px;
-}
-
-.section-index {
-  font-family: var(--serif);
-  font-size: 11px;
-  font-style: italic;
-  color: var(--gold);
-  opacity: 0.7;
-}
-
-.section-title-sm {
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.reel-frame {
-  aspect-ratio: 16/9;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.reel-frame::before {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 60%, rgba(184,151,90,0.05) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 30%, rgba(74,58,106,0.04) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.reel-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-  position: relative;
-  z-index: 1;
-}
-
-.play-circle {
-  width: 80px; height: 80px;
-  border: 1px solid rgba(184,151,90,0.3);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  position: relative;
-}
-.play-circle::before {
-  content: '';
-  position: absolute;
-  inset: -8px;
-  border: 1px solid rgba(184,151,90,0.1);
-  border-radius: 50%;
-  transition: all 0.5s;
-}
-.reel-frame:hover .play-circle {
-  border-color: var(--gold);
-  background: rgba(184,151,90,0.08);
-  transform: scale(1.05);
-}
-.reel-frame:hover .play-circle::before {
-  inset: -16px;
-  opacity: 0;
-}
-
-.play-icon {
-  width: 0; height: 0;
-  border-left: 18px solid var(--gold);
-  border-top: 11px solid transparent;
-  border-bottom: 11px solid transparent;
-  margin-left: 4px;
-}
-
-.reel-label {
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.reel-corners span {
-  position: absolute;
-  font-size: 9px;
-  letter-spacing: 2px;
-  color: var(--muted);
-  font-family: var(--sans);
-}
-.reel-corners .tl { top: 20px; left: 24px; }
-.reel-corners .tr { top: 20px; right: 24px; color: var(--gold); opacity: 0.7; }
-.reel-corners .bl { bottom: 20px; left: 24px; }
-.reel-corners .br { bottom: 20px; right: 24px; }
-
-/* ABOUT */
-.about {
-  padding: 120px 56px;
-  display: grid;
-  grid-template-columns: 5fr 4fr;
-  gap: 100px;
-  align-items: start;
-}
-
-.about-text-block { padding-top: 8px; }
-
-.display-title {
-  font-family: var(--serif);
-  font-size: clamp(40px, 5vw, 72px);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -1px;
-  margin-bottom: 40px;
-}
-.display-title em { font-style: italic; color: var(--gold); }
-
-.body-text {
-  font-size: 15px;
-  line-height: 1.9;
-  color: #948e86;
-  margin-bottom: 20px;
-  font-weight: 300;
-}
-
-.about-stats {
-  margin-top: 52px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--border);
-  padding-top: 40px;
-  gap: 32px;
-}
-
-.stat-num {
-  font-family: var(--serif);
-  font-size: 48px;
-  font-weight: 400;
-  color: var(--gold);
-  line-height: 1;
-  display: block;
-}
-.stat-label {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 8px;
-  display: block;
-}
-
-.about-visual-col {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  position: sticky;
-  top: 120px;
-}
-
-.portrait-frame {
-  aspect-ratio: 3/4;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.portrait-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.monogram {
-  font-family: var(--serif);
-  font-size: 96px;
-  font-weight: 400;
-  color: rgba(184,151,90,0.08);
-  letter-spacing: -6px;
-  line-height: 1;
-}
-
-.portrait-caption {
-  font-size: 9px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.portrait-badge {
-  position: absolute;
-  bottom: 0; right: 0;
-  background: var(--gold);
-  color: #000;
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 10px 18px;
-  font-weight: 400;
-}
-
-.clients-strip {
-  padding: 16px 20px;
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  display: flex;
-  gap: 20px;
-  justify-content: space-around;
-  align-items: center;
-}
-
-.client-name {
-  font-family: var(--serif);
-  font-size: 13px;
-  color: rgba(184,151,90,0.3);
-  letter-spacing: 2px;
-  transition: color 0.3s;
-  font-style: italic;
-}
-.client-name:hover { color: var(--gold); }
-
-/* PORTFOLIO */
-.portfolio {
-  padding: 120px 56px;
-}
-
-.portfolio-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 60px;
-}
-
-.filters {
-  display: flex;
-  gap: 28px;
-}
-.filter-btn {
-  background: none; border: none;
-  font-family: var(--sans);
-  font-size: 10px; letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted); cursor: pointer;
-  padding: 0; transition: color 0.3s;
-  font-weight: 300;
-}
-.filter-btn.active, .filter-btn:hover { color: var(--gold); }
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: auto;
-  gap: 3px;
-}
-
-.pitem {
-  background: var(--bg2);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-}
-.pitem:nth-child(1) { grid-column: span 8; aspect-ratio: 16/9; }
-.pitem:nth-child(2) { grid-column: span 4; aspect-ratio: 3/4; }
-.pitem:nth-child(3) { grid-column: span 4; aspect-ratio: 3/4; }
-.pitem:nth-child(4) { grid-column: span 8; aspect-ratio: 16/9; }
-.pitem:nth-child(5) { grid-column: span 6; aspect-ratio: 16/9; }
-.pitem:nth-child(6) { grid-column: span 6; aspect-ratio: 16/9; }
-
-.pitem-bg {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  background: linear-gradient(135deg, var(--bg2) 0%, #111118 100%);
-}
-.pitem:hover .pitem-bg { transform: scale(1.04); }
-
-.pitem-watermark {
-  font-family: var(--serif);
-  font-size: clamp(20px, 3vw, 36px);
-  font-style: italic;
-  color: rgba(184,151,90,0.06);
-  letter-spacing: 2px;
-  text-align: center;
-}
-
-.pitem-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(6,6,10,0.9) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.5s;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 28px;
-}
-.pitem:hover .pitem-overlay { opacity: 1; }
-
-.pitem-client {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 6px;
-}
-.pitem-title {
-  font-family: var(--serif);
-  font-size: clamp(18px, 2.5vw, 28px);
-  font-weight: 400;
-  color: var(--text);
-  margin-bottom: 4px;
-}
-.pitem-type {
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 1px;
-}
-
-.pitem-num {
-  position: absolute;
-  top: 16px; right: 18px;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 11px;
-  color: rgba(184,151,90,0.3);
-}
-
-/* SERVICES */
-.services {
-  padding: 120px 56px;
-}
-
-.services-grid {
-  margin-top: 60px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
-}
-
-.service {
-  background: var(--bg2);
-  padding: 52px 44px;
-  border: 1px solid var(--border);
-  border-width: 0;
-  position: relative;
-  transition: background 0.5s;
-  overflow: hidden;
-}
-.service::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 1px;
-  background: linear-gradient(to right, var(--gold), transparent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.service:hover::before { transform: scaleX(1); }
-.service:hover { background: #0f0f16; }
-
-.service-idx {
-  font-family: var(--serif);
-  font-size: 56px;
-  font-style: italic;
-  font-weight: 400;
-  color: rgba(184,151,90,0.08);
-  line-height: 1;
-  margin-bottom: 28px;
-}
-
-.service-name {
-  font-size: 10px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 20px;
-}
-
-.service-desc {
-  font-size: 14px;
-  line-height: 1.85;
-  color: #6e6860;
-  margin-bottom: 40px;
-}
-
-.service-price {
-  font-family: var(--serif);
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--text);
-}
-.service-price small {
-  font-family: var(--sans);
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 1px;
-  margin-left: 6px;
-  font-weight: 300;
-}
-
-/* CONTACT */
-.contact {
-  padding: 140px 56px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 100px;
-  align-items: start;
-}
-
-.contact-left {}
-
-.contact-headline {
-  font-family: var(--serif);
-  font-size: clamp(44px, 6vw, 80px);
-  font-weight: 400;
-  line-height: 1.05;
-  letter-spacing: -1px;
-  margin-bottom: 52px;
-}
-.contact-headline em { font-style: italic; color: var(--gold); display: block; }
-
-.contact-details { display: flex; flex-direction: column; gap: 0; }
-
-.contact-row {
-  display: flex;
-  gap: 28px;
-  align-items: baseline;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--border);
-}
-.contact-row:first-child { border-top: 1px solid var(--border); }
-
-.contact-key {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-  width: 72px;
-  flex-shrink: 0;
-}
-.contact-val {
-  font-size: 14px;
-  color: var(--text);
-  font-weight: 300;
-}
-.contact-val a {
-  color: var(--text);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-.contact-val a:hover { color: var(--gold); }
-
-.contact-form { display: flex; flex-direction: column; gap: 20px; }
-
-.field { display: flex; flex-direction: column; gap: 10px; }
-
-.field label {
-  font-size: 9px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.field input, .field textarea, .field select {
-  background: var(--bg2);
-  border: 1px solid var(--border);
-  border-bottom-color: rgba(255,255,255,0.1);
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 14px;
-  font-weight: 300;
-  padding: 16px 0;
-  outline: none;
-  transition: border-color 0.3s;
-  width: 100%;
-  border-top: none; border-left: none; border-right: none;
-  background: transparent;
-}
-.field input:focus, .field textarea:focus, .field select:focus {
-  border-bottom-color: var(--gold);
-}
-.field textarea { min-height: 110px; resize: none; }
-.field select { appearance: none; cursor: pointer; }
-
-.send-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 16px;
-  background: none;
-  border: 1px solid rgba(184,151,90,0.3);
-  color: var(--gold);
-  font-family: var(--sans);
-  font-size: 10px;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  padding: 18px 36px;
-  cursor: pointer;
-  transition: all 0.4s;
-  font-weight: 300;
-  margin-top: 8px;
-  align-self: flex-start;
-}
-.send-btn::after {
-  content: '→';
-  transition: transform 0.3s;
-}
-.send-btn:hover {
-  background: var(--gold-dim);
-  border-color: var(--gold);
-}
-.send-btn:hover::after { transform: translateX(6px); }
-
-/* FOOTER */
-footer {
-  padding: 40px 56px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-logo {
-  font-family: var(--serif);
-  font-size: 14px;
-  letter-spacing: 6px;
-  color: var(--muted);
-  font-style: italic;
-}
-
-.footer-copy {
-  font-size: 10px;
-  letter-spacing: 1px;
-  color: var(--muted);
-}
-
-.footer-links { display: flex; gap: 28px; }
-.footer-links a {
-  font-size: 10px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-.footer-links a:hover { color: var(--gold); }
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; } to { opacity: 1; }
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.reveal.visible { opacity: 1; transform: none; }
-
-@media (max-width: 960px) {
-  nav { padding: 24px 28px; }
-  .nav-links { display: none; }
-  .hero-content { padding: 100px 24px 0; }
-  .hero-bottom { padding: 24px 24px 40px; flex-direction: column; gap: 20px; align-items: flex-start; }
-  .hero-headline { font-size: clamp(42px, 12vw, 80px); letter-spacing: -1px; }
-  .hero-label { font-size: 9px; }
-  .hero-sub { font-size: 10px; }
-  .divider { margin: 0 24px; }
-  .showreel, .about, .portfolio, .services, .contact { padding: 60px 20px; }
-  .about { grid-template-columns: 1fr; gap: 48px; }
-  .about-visual-col { position: static; }
-  .services-grid { grid-template-columns: 1fr; }
-  .contact { grid-template-columns: 1fr; gap: 48px; }
-  .pitem:nth-child(n) { grid-column: span 12; }
-  footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
-  .reel-corners span { font-size: 8px; padding: 3px 6px !important; }
-  .reel-corners .tl { top: 10px; left: 12px; }
-  .reel-corners .tr { top: 10px; right: 12px; }
-  .reel-corners .bl { bottom: 10px; left: 12px; }
-  .reel-corners .br { bottom: 10px; right: 12px; }
-  .contact-headline { font-size: clamp(32px, 9vw, 56px); }
-  .display-title { font-size: clamp(32px, 8vw, 56px); }
-  .about-stats { grid-template-columns: repeat(3,1fr); gap: 16px; }
-  .stat-num { font-size: 36px; }
+/* ============================================================
+   PAPPAGALLO — Director's Cut
+   Single-file site · HTML + CSS + JS
+   Palette & type: locked design decisions — do not change
+   ============================================================ */
+
+:root{
+  --bg:#06060a;
+  --bg2:#0c0c12;
+  --gold:#b8975a;
+  --gold-light:#d4b07a;
+  --gold-dim:rgba(184,151,90,0.15);
+  --text:#ede8e0;
+  --muted:#5c5650;
+  --muted2:#6e6860;
+  --border:rgba(255,255,255,0.06);
+  --serif:'Playfair Display',serif;
+  --sans:'Outfit',sans-serif;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+  --pad:56px;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-weight:300;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--gold);color:var(--bg)}
+a{color:inherit}
+img,iframe{display:block}
+
+/* ---------- Custom cursor ---------- */
+@media (pointer:fine){
+  body.cursor-on, body.cursor-on a, body.cursor-on button,
+  body.cursor-on input, body.cursor-on select, body.cursor-on textarea{cursor:none}
+}
+#cur{
+  position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+  mix-blend-mode:difference;display:none;
+}
+#curRing{
+  position:fixed;width:38px;height:38px;border:1px solid rgba(184,151,90,.5);border-radius:50%;
+  pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
+  transition:width .35s var(--ease),height .35s var(--ease),background .35s,border-color .35s;
+  display:none;align-items:center;justify-content:center;
+}
+#curRing span{
+  font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);
+  opacity:0;transition:opacity .25s;font-weight:400;padding-left:3px;
+}
+#curRing.is-link{width:56px;height:56px;background:rgba(184,151,90,.06)}
+#curRing.is-view{width:92px;height:92px;background:rgba(6,6,10,.45);border-color:var(--gold);backdrop-filter:blur(2px)}
+#curRing.is-view span{opacity:1}
+@media (pointer:fine){ #cur,#curRing{display:flex} }
+
+/* ---------- Film grain ---------- */
+.grain{
+  position:fixed;inset:-100%;width:300%;height:300%;pointer-events:none;z-index:1200;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity:.045;
+  animation:grain 7s steps(10) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0)} 10%{transform:translate(-5%,-8%)}
+  20%{transform:translate(-12%,3%)} 30%{transform:translate(6%,-10%)}
+  40%{transform:translate(-4%,12%)} 50%{transform:translate(-10%,4%)}
+  60%{transform:translate(12%,0)} 70%{transform:translate(0,8%)}
+  80%{transform:translate(3%,12%)} 90%{transform:translate(-8%,8%)}
+}
+
+/* ---------- Scroll progress ---------- */
+#progress{
+  position:fixed;top:0;left:0;height:2px;width:100%;z-index:1500;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  transform:scaleX(0);transform-origin:left;
+}
+
+/* ---------- Preloader (film leader) ---------- */
+#preloader{
+  position:fixed;inset:0;z-index:2100;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .6s ease,visibility .6s;
+}
+#preloader.done{opacity:0;visibility:hidden}
+.pl-cross-h,.pl-cross-v{position:absolute;background:rgba(255,255,255,.05)}
+.pl-cross-h{left:0;right:0;top:50%;height:1px}
+.pl-cross-v{top:0;bottom:0;left:50%;width:1px}
+.pl-stage{position:relative;width:min(62vmin,440px);height:min(62vmin,440px);display:flex;align-items:center;justify-content:center}
+.pl-stage svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.pl-circle-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:1}
+.pl-circle-fg{fill:none;stroke:var(--gold);stroke-width:1.5;stroke-linecap:round;
+  stroke-dasharray:301.6;stroke-dashoffset:301.6}
+.pl-sweep{
+  position:absolute;inset:0;border-radius:50%;
+  background:conic-gradient(from 0deg,rgba(184,151,90,.18),transparent 18%);
+  animation:plsweep 1.05s linear infinite;
+  -webkit-mask:radial-gradient(circle,transparent 54%,#000 54.5%,#000 100%);
+  mask:radial-gradient(circle,transparent 54%,#000 54.5%,#000 100%);
+}
+@keyframes plsweep{to{transform:rotate(360deg)}}
+.pl-count{
+  font-family:var(--serif);font-size:clamp(110px,24vmin,190px);font-weight:400;
+  color:var(--text);line-height:1;font-variant-numeric:tabular-nums;
+}
+.pl-brand{
+  position:absolute;bottom:-72px;left:50%;transform:translateX(-50%);
+  font-size:10px;letter-spacing:7px;text-transform:uppercase;color:var(--muted);
+  white-space:nowrap;display:flex;align-items:center;gap:10px;
+}
+.pl-brand b{color:var(--gold);font-weight:400}
+.pl-corner{position:absolute;font-size:8px;letter-spacing:3px;color:rgba(255,255,255,.18);text-transform:uppercase}
+.pl-corner.tl{top:26px;left:30px}.pl-corner.tr{top:26px;right:30px}
+.pl-corner.bl{bottom:26px;left:30px}.pl-corner.br{bottom:26px;right:30px}
+
+/* ---------- Letterbox curtains ---------- */
+.curtain{position:fixed;left:0;right:0;height:50.5vh;background:#020203;z-index:2000;
+  transition:transform 1.15s var(--ease)}
+.curtain.top{top:0;transform-origin:top}
+.curtain.bottom{bottom:0;transform-origin:bottom}
+body.revealed .curtain.top{transform:translateY(-101%)}
+body.revealed .curtain.bottom{transform:translateY(101%)}
+
+/* ---------- Nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1600;
+  padding:30px var(--pad);display:flex;align-items:center;justify-content:space-between;
+  transition:padding .45s var(--ease),background .45s,backdrop-filter .45s;
+}
+nav::before{
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(6,6,10,.9),transparent);
+  opacity:1;transition:opacity .4s;
+}
+nav.scrolled{padding:16px var(--pad);background:rgba(6,6,10,.72);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border)}
+nav.scrolled::before{opacity:0}
+/* ---------- Logo ---------- */
+.logo-mark{display:inline-block;flex-shrink:0}
+.lm-nav{width:26px;height:26px;color:var(--gold)}
+.lm-pre{width:14px;height:14px;color:var(--gold)}
+.lm-portrait{width:150px;height:150px;color:rgba(184,151,90,.16);margin-bottom:6px}
+.lm-foot{width:18px;height:18px;color:var(--gold)}
+
+.nav-logo{
+  font-family:var(--serif);font-size:17px;letter-spacing:8px;text-transform:uppercase;
+  text-decoration:none;color:var(--text);position:relative;
+  display:inline-flex;align-items:center;gap:14px;
+}
+.nav-right{display:flex;align-items:center;gap:48px}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);
+  text-decoration:none;font-weight:300;position:relative;padding:4px 0;
+  transition:color .4s;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:0;height:1px;width:100%;
+  background:var(--gold);transform:scaleX(0);transform-origin:right;
+  transition:transform .45s var(--ease);
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+.lang-switcher{display:flex;gap:12px}
+.lang-switcher button{
+  background:transparent;border:none;font-family:var(--sans);font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:0;
+  transition:color .3s;font-weight:300;
+}
+.lang-switcher button.active{color:var(--gold-light)}
+.lang-switcher button:hover{color:var(--gold-light)}
+
+/* Hamburger */
+.burger{
+  display:none;background:transparent;border:none;width:34px;height:22px;
+  position:relative;z-index:1700;
+}
+.burger span{
+  position:absolute;left:0;width:100%;height:1px;background:var(--text);
+  transition:transform .45s var(--ease),top .45s var(--ease),background .3s;
+}
+.burger span:nth-child(1){top:4px}
+.burger span:nth-child(2){top:16px}
+body.menu-open{overflow:hidden}
+body.menu-open .burger span:nth-child(1){top:10px;transform:rotate(45deg);background:var(--gold)}
+body.menu-open .burger span:nth-child(2){top:10px;transform:rotate(-45deg);background:var(--gold)}
+
+/* Mobile overlay menu */
+#mobileMenu{
+  position:fixed;inset:0;z-index:1650;background:rgba(4,4,7,.97);
+  display:flex;flex-direction:column;justify-content:center;padding:0 28px;
+  clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease);
+  visibility:hidden;
+}
+body.menu-open #mobileMenu{clip-path:inset(0 0 0 0);visibility:visible}
+#mobileMenu ul{list-style:none}
+#mobileMenu li{overflow:hidden;padding:6px 0}
+#mobileMenu a{
+  display:inline-block;font-family:var(--serif);font-size:clamp(40px,11vw,72px);
+  color:var(--text);text-decoration:none;line-height:1.1;
+  transform:translateY(110%);transition:transform .7s var(--ease),color .3s;
+}
+body.menu-open #mobileMenu a{transform:translateY(0)}
+body.menu-open #mobileMenu li:nth-child(1) a{transition-delay:.12s}
+body.menu-open #mobileMenu li:nth-child(2) a{transition-delay:.19s}
+body.menu-open #mobileMenu li:nth-child(3) a{transition-delay:.26s}
+body.menu-open #mobileMenu li:nth-child(4) a{transition-delay:.33s}
+#mobileMenu a:hover{color:var(--gold)}
+#mobileMenu a em{font-style:italic;color:var(--gold)}
+.mm-foot{
+  margin-top:56px;display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid var(--border);padding-top:24px;
+  opacity:0;transition:opacity .6s .45s;
+}
+body.menu-open .mm-foot{opacity:1}
+.mm-foot .lang-switcher button{font-size:11px}
+.mm-foot .mm-mail{font-size:11px;letter-spacing:1px;color:var(--muted);text-decoration:none}
+
+/* ---------- Hero ---------- */
+.hero{
+  min-height:100svh;display:grid;grid-template-rows:1fr auto;
+  position:relative;overflow:hidden;
+}
+.hero-video{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-video .vwrap{position:absolute;inset:0;will-change:transform}
+.hero-video iframe{
+  position:absolute;top:50%;left:50%;
+  width:177.78vh;min-width:100%;height:100vh;min-height:56.25vw;
+  transform:translate(-50%,-50%);border:0;
+}
+.hero-shade{
+  position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(6,6,10,.6) 0%,rgba(6,6,10,.28) 42%,rgba(6,6,10,.78) 100%);
+}
+.hero-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at center,transparent 55%,rgba(6,6,10,.55) 100%);
+}
+.hero-orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.12;pointer-events:none}
+.hero-orb.o1{width:700px;height:700px;top:-200px;right:-100px;
+  background:radial-gradient(circle,#b8975a 0%,transparent 70%);animation:drift1 18s ease-in-out infinite}
+.hero-orb.o2{width:500px;height:500px;bottom:-100px;left:-100px;
+  background:radial-gradient(circle,#4a3a6a 0%,transparent 70%);animation:drift2 22s ease-in-out infinite}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-80px,60px)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(70px,-50px)}}
+
+.hero-content{
+  position:relative;z-index:2;padding:150px var(--pad) 0;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.hero-label{
+  font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);
+  margin-bottom:30px;display:flex;align-items:center;gap:20px;
+  opacity:0;
+}
+body.revealed .hero-label{animation:fadeUp 1s var(--ease) .25s forwards}
+.hero-label .line{width:48px;height:1px;background:var(--gold);opacity:.5;transform-origin:left;
+  transform:scaleX(0)}
+body.revealed .hero-label .line{animation:growX .9s var(--ease) .45s forwards}
+@keyframes growX{to{transform:scaleX(1)}}
+
+.hero-headline{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(64px,11vw,160px);line-height:.9;letter-spacing:-3px;
+}
+.hl-mask{display:block;overflow:hidden;padding-bottom:.06em;margin-bottom:-.06em}
+.hl{display:inline-block;transform:translateY(115%) skewY(4deg);transform-origin:left bottom}
+body.revealed .hl{animation:lineUp 1.15s var(--ease) forwards}
+body.revealed .hl-mask:nth-child(1) .hl{animation-delay:.35s}
+body.revealed .hl-mask:nth-child(2) .hl{animation-delay:.45s}
+body.revealed .hl-mask:nth-child(3) .hl{animation-delay:.55s}
+body.revealed .hl-mask:nth-child(4) .hl{animation-delay:.65s}
+@keyframes lineUp{to{transform:translateY(0) skewY(0)}}
+.hero-headline em{font-style:italic;color:var(--gold)}
+
+.hero-bottom{
+  position:relative;z-index:2;padding:36px var(--pad) 60px;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:32px;
+}
+.hero-meta{
+  font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);
+  line-height:2.2;white-space:pre-line;opacity:0;
+}
+body.revealed .hero-meta{animation:fadeUp 1s var(--ease) .85s forwards}
+.hero-cta-wrap{opacity:0}
+body.revealed .hero-cta-wrap{animation:fadeUp 1s var(--ease) 1s forwards}
+.btn{
+  display:inline-flex;align-items:center;gap:14px;
+  border:1px solid rgba(184,151,90,.4);color:var(--gold);
+  font-family:var(--sans);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  padding:17px 34px;text-decoration:none;font-weight:300;background:transparent;
+  position:relative;overflow:hidden;transition:color .45s,border-color .45s;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;background:var(--gold);
+  transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--ease);z-index:-1;
+}
+.btn:hover{color:var(--bg);border-color:var(--gold)}
+.btn:hover::before{transform:scaleY(1)}
+.btn .arr{transition:transform .35s var(--ease)}
+.btn:hover .arr{transform:translateX(6px)}
+
+.hero-scroll{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;padding-bottom:30px;
+  z-index:2;opacity:0;
+}
+body.revealed .hero-scroll{animation:fadeIn 1.2s ease 1.5s forwards}
+.hero-scroll .wire{width:1px;height:64px;
+  background:linear-gradient(to bottom,transparent,var(--gold),transparent);
+  animation:scrollPulse 2.4s ease-in-out infinite}
+.hero-scroll span{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);
+  writing-mode:vertical-lr}
+@keyframes scrollPulse{0%,100%{opacity:.25;transform:scaleY(.7)}50%{opacity:1;transform:scaleY(1)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{to{opacity:1}}
+
+/* ---------- Marquee ---------- */
+.marquee{
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:26px 0;overflow:hidden;position:relative;background:var(--bg);
+}
+.mq-track{display:flex;width:max-content;animation:mq 30s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+.mq-group{display:flex;align-items:center;flex-shrink:0}
+.mq-item{
+  font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(26px,3.4vw,44px);color:rgba(237,232,224,.14);
+  padding:0 38px;white-space:nowrap;transition:color .4s;
+}
+.mq-item:hover{color:rgba(184,151,90,.55)}
+.mq-sep{color:rgba(184,151,90,.35);font-size:11px}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ---------- Section scaffolding ---------- */
+section{padding:120px var(--pad);position:relative}
+.sec-head{display:flex;align-items:baseline;gap:20px;margin-bottom:52px}
+.sec-num{font-family:var(--serif);font-size:11px;font-style:italic;color:var(--gold);opacity:.7}
+.sec-label{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--muted)}
+.divider{height:1px;background:var(--border);margin:0 var(--pad);position:relative}
+.divider::before{content:'';position:absolute;left:0;top:0;height:1px;width:80px;
+  background:linear-gradient(90deg,var(--gold),transparent)}
+.h2{
+  font-family:var(--serif);font-weight:400;letter-spacing:-1px;
+  font-size:clamp(40px,5vw,72px);line-height:1.05;
+}
+.h2 em{font-style:italic;color:var(--gold)}
+
+/* Reveal on scroll */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal[data-delay="1"]{transition-delay:.1s}
+.reveal[data-delay="2"]{transition-delay:.2s}
+.reveal[data-delay="3"]{transition-delay:.3s}
+
+/* ---------- Showreel ---------- */
+.reel{position:relative;margin-bottom:3px}
+.reel-clip{
+  position:relative;padding-top:56.25%;overflow:hidden;background:var(--bg2);
+  clip-path:inset(7% 5% 7% 5%);transition:clip-path 1.3s var(--ease);
+}
+.reel.visible .reel-clip{clip-path:inset(0 0 0 0)}
+.reel-clip iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.reel-tag{
+  position:absolute;font-size:9px;letter-spacing:2px;color:var(--muted);
+  background:rgba(6,6,10,.55);padding:5px 9px;z-index:5;pointer-events:none;
+}
+.reel-tag.tl{top:20px;left:24px}
+.reel-tag.tr{top:20px;right:24px;color:rgba(184,151,90,.7)}
+.reel-tag.bl{bottom:20px;left:24px}
+.reel-tag.br{bottom:20px;right:24px}
+.reel-status{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 4px 30px;font-size:9px;letter-spacing:2px;color:var(--muted);
+  text-transform:uppercase;font-variant-numeric:tabular-nums;flex-wrap:wrap;gap:10px;
+}
+.rec{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.rec-dot{width:7px;height:7px;border-radius:50%;background:#c0392b;animation:rec 1.4s ease-in-out infinite}
+@keyframes rec{0%,100%{opacity:1}50%{opacity:.15}}
+#tc{color:var(--gold-light);letter-spacing:3px}
+
+/* ---------- Manifesto ---------- */
+.manifesto{padding:160px var(--pad)}
+.manifesto p{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(32px,5.4vw,80px);line-height:1.18;letter-spacing:-1px;
+  max-width:1100px;
+}
+.manifesto .w{opacity:.12;transition:opacity .35s linear}
+.manifesto em{font-style:italic;color:var(--gold)}
+
+/* ---------- About ---------- */
+.about{display:grid;grid-template-columns:5fr 4fr;gap:100px;align-items:start}
+.about-bio p{font-size:15px;line-height:1.9;color:#9a948b;margin-bottom:20px;font-weight:300;max-width:560px}
+.about-stats{
+  margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--border);padding-top:40px;gap:32px;
+}
+.stat-num{font-family:var(--serif);font-size:48px;color:var(--gold);line-height:1;display:block;
+  font-variant-numeric:tabular-nums}
+.stat-lab{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);
+  margin-top:8px;display:block}
+.about-visual{display:flex;flex-direction:column;gap:2px;position:sticky;top:120px;perspective:900px}
+.portrait{
+  aspect-ratio:3/4;background:var(--bg2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+  transition:transform .2s ease-out;transform-style:preserve-3d;will-change:transform;
+}
+.portrait .loc{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--muted);margin-top:12px}
+.portrait .inner{display:flex;flex-direction:column;align-items:center;transform:translateZ(30px)}
+.portrait .badge{
+  position:absolute;bottom:0;right:0;background:var(--gold);color:var(--bg);
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:10px 18px;font-weight:400;
+}
+.portrait::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(184,151,90,.07),transparent 60%);
+  opacity:0;transition:opacity .4s;pointer-events:none;
+}
+.portrait:hover::after{opacity:1}
+.clients-strip{
+  padding:16px 20px;background:var(--bg2);border:1px solid var(--border);
+  display:flex;gap:20px;justify-content:space-around;align-items:center;flex-wrap:wrap;
+}
+.clients-strip span{
+  font-family:var(--serif);font-style:italic;font-size:13px;letter-spacing:2px;
+  color:rgba(184,151,90,.3);transition:color .3s;
+}
+.clients-strip span:hover{color:var(--gold)}
+
+/* ---------- Portfolio ---------- */
+.pf-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:60px;gap:24px;flex-wrap:wrap}
+.pf-head .sec-head{margin-bottom:0}
+.pf-filters{display:flex;gap:28px}
+.pf-filters button{
+  background:transparent;border:none;font-family:var(--sans);font-size:10px;
+  letter-spacing:3px;text-transform:uppercase;color:var(--muted);padding:4px 0;
+  transition:color .3s;font-weight:300;position:relative;
+}
+.pf-filters button::after{
+  content:'';position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--gold);
+  transform:scaleX(0);transition:transform .4s var(--ease);transform-origin:left;
+}
+.pf-filters button.active{color:var(--gold)}
+.pf-filters button.active::after{transform:scaleX(1)}
+.pf-filters button:hover{color:var(--gold)}
+
+.pgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;perspective:1400px}
+.pitem{
+  position:relative;overflow:hidden;background:var(--bg2);
+  transition:opacity .45s var(--ease),transform .45s var(--ease);
+  transform-style:preserve-3d;will-change:transform;
+}
+.pitem.span8{grid-column:span 8;aspect-ratio:16/9}
+.pitem.span4{grid-column:span 4;aspect-ratio:3/4}
+.pitem.span6{grid-column:span 6;aspect-ratio:16/9}
+.pitem.is-hidden{opacity:0;transform:scale(.96);pointer-events:none}
+.pitem-bg{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--bg2),#111118);
+  transition:transform .8s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.pitem:hover .pitem-bg{transform:scale(1.05)}
+.pitem-wm{font-family:var(--serif);font-style:italic;font-size:clamp(20px,3vw,36px);
+  color:rgba(184,151,90,.06);letter-spacing:2px;text-align:center}
+.pitem-num{
+  position:absolute;top:16px;right:18px;font-family:var(--serif);font-style:italic;
+  font-size:11px;color:rgba(184,151,90,.3);z-index:3;transition:color .4s;
+}
+.pitem:hover .pitem-num{color:var(--gold)}
+.pitem-spot{
+  position:absolute;inset:0;pointer-events:none;z-index:2;opacity:0;transition:opacity .4s;
+  background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(184,151,90,.08),transparent 60%);
+}
+.pitem:hover .pitem-spot{opacity:1}
+.pitem-overlay{
+  position:absolute;inset:0;z-index:4;
+  background:linear-gradient(to top,rgba(6,6,10,.92),transparent 65%);
+  opacity:0;transition:opacity .5s;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:28px;
+}
+.pitem:hover .pitem-overlay{opacity:1}
+.pitem-client{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;
+  transform:translateY(12px);transition:transform .5s var(--ease)}
+.pitem-title{font-family:var(--serif);font-size:clamp(18px,2.5vw,28px);color:var(--text);margin-bottom:4px;
+  transform:translateY(12px);transition:transform .55s var(--ease)}
+.pitem-type{font-size:10px;letter-spacing:1px;color:var(--muted);
+  transform:translateY(12px);transition:transform .6s var(--ease)}
+.pitem:hover .pitem-client,.pitem:hover .pitem-title,.pitem:hover .pitem-type{transform:translateY(0)}
+
+/* ---------- Services ---------- */
+.svc-grid{margin-top:60px;display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
+.svc{
+  background:var(--bg2);padding:52px 44px;position:relative;overflow:hidden;
+  transition:background .5s;
+}
+.svc:hover{background:#0f0f16}
+.svc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.svc:hover::before{transform:scaleX(1)}
+.svc::after{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .45s;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(184,151,90,.06),transparent 65%);
+}
+.svc:hover::after{opacity:1}
+.svc-idx{font-family:var(--serif);font-style:italic;font-size:56px;color:rgba(184,151,90,.08);
+  line-height:1;margin-bottom:28px;transition:color .5s}
+.svc:hover .svc-idx{color:rgba(184,151,90,.28)}
+.svc-name{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.svc-desc{font-size:14px;line-height:1.85;color:var(--muted2);margin-bottom:40px;max-width:420px}
+.svc-price{font-family:var(--serif);font-size:22px;color:var(--text)}
+.svc-price small{font-family:var(--sans);font-size:10px;color:var(--muted);letter-spacing:1px;margin-left:6px;font-weight:300}
+
+/* ---------- Contact ---------- */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start;
+  padding-top:140px;padding-bottom:140px}
+.c-rows{display:flex;flex-direction:column}
+.c-row{display:flex;gap:28px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--border)}
+.c-row:first-child{border-top:1px solid var(--border)}
+.c-key{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);width:84px;flex-shrink:0}
+.c-val{font-size:14px;font-weight:300}
+.c-val a{text-decoration:none;transition:color .3s}
+.c-val a:hover{color:var(--gold)}
+.cform{display:flex;flex-direction:column;gap:22px}
+.field{display:flex;flex-direction:column;gap:10px;position:relative}
+.field label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{
+  background:transparent;border:none;border-bottom:1px solid rgba(255,255,255,.1);
+  color:var(--text);font-family:var(--sans);font-size:14px;font-weight:300;
+  padding:14px 0;outline:none;width:100%;border-radius:0;
+}
+.field textarea{resize:none;min-height:110px}
+.field select{appearance:none}
+.field option{background:var(--bg);color:var(--text)}
+.field .fline{
+  position:absolute;bottom:0;left:0;height:1px;width:100%;background:var(--gold);
+  transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease);
+}
+.field:focus-within .fline{transform:scaleX(1)}
+.cform .btn{align-self:flex-start;margin-top:6px}
+.form-note{font-size:10px;letter-spacing:1px;color:var(--muted)}
+
+/* ---------- Footer ---------- */
+footer{
+  padding:40px var(--pad);border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;
+}
+.f-brand{font-family:var(--serif);font-style:italic;font-size:14px;letter-spacing:6px;color:var(--muted);display:inline-flex;align-items:center;gap:12px}
+.f-mid{display:flex;flex-direction:column;gap:6px;text-align:center}
+.f-copy{font-size:10px;letter-spacing:1px;color:var(--muted)}
+.f-clock{font-size:9px;letter-spacing:2px;color:rgba(184,151,90,.55);text-transform:uppercase;
+  font-variant-numeric:tabular-nums}
+.f-links{display:flex;gap:28px;align-items:center}
+.f-links a{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  text-decoration:none;transition:color .3s}
+.f-links a:hover{color:var(--gold)}
+#toTop{background:transparent;border:1px solid var(--border);color:var(--muted);
+  width:38px;height:38px;border-radius:50%;font-size:13px;
+  transition:color .3s,border-color .3s,transform .3s}
+#toTop:hover{color:var(--gold);border-color:var(--gold);transform:translateY(-3px)}
+
+/* ---------- Responsive ---------- */
+@media(max-width:1024px){
+  :root{--pad:36px}
+  .about{grid-template-columns:1fr;gap:64px}
+  .about-visual{position:static;max-width:440px}
+  .contact{grid-template-columns:1fr;gap:64px}
+}
+@media(max-width:860px){
+  .nav-links{display:none}
+  nav .lang-switcher{display:none}
+  .burger{display:block}
+  .svc-grid{grid-template-columns:1fr}
+  .pitem.span8,.pitem.span4,.pitem.span6{grid-column:span 12}
+  .pitem.span4{aspect-ratio:3/4}
+}
+@media(max-width:640px){
+  :root{--pad:24px}
+  section{padding-top:88px;padding-bottom:88px}
+  .hero-bottom{flex-direction:column;align-items:flex-start;gap:28px;padding-bottom:84px}
+  .hero-headline{letter-spacing:-2px}
+  .reel-tag{font-size:8px;padding:4px 7px}
+  .reel-tag.bl,.reel-tag.br{display:none}
+  .manifesto{padding-top:110px;padding-bottom:110px}
+  .pl-brand{bottom:-56px;font-size:9px;letter-spacing:5px}
+  footer{flex-direction:column;text-align:center}
+  .f-mid{order:3}
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;
+    transition-duration:.001s!important;scroll-behavior:auto!important}
+  #preloader,.curtain{display:none!important}
+  .hero-label,.hero-meta,.hero-cta-wrap,.hero-scroll{opacity:1!important}
+  .hl{transform:none!important}
+  .reveal{opacity:1!important;transform:none!important}
+  .reel-clip{clip-path:inset(0 0 0 0)!important}
+  .manifesto .w{opacity:1!important}
+  .grain{display:none}
 }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="ppMark" viewBox="-128 -148 984 984"><path fill="currentColor" d="M39 0Q62 1 98.5 2.0Q135 3 171 3Q219 3 262.5 2.0Q306 1 324 1Q451 1 514.0 56.0Q577 111 577 198Q577 234 564.5 273.5Q552 313 521.0 346.5Q490 380 437.0 401.0Q384 422 302 422H204V402H292Q359 402 394.5 375.0Q430 348 442.5 304.0Q455 260 455 209Q455 114 421.0 67.0Q387 20 303 20Q260 20 246.5 37.0Q233 54 233 106V600Q233 637 241.0 655.5Q249 674 271.0 680.0Q293 686 336 687V708Q309 706 266.0 705.5Q223 705 177 705Q137 705 100.5 705.5Q64 706 39 708V688Q73 686 90.0 680.0Q107 674 112.5 656.0Q118 638 118 602V106Q118 69 112.5 51.5Q107 34 89.5 27.5Q72 21 39 20Z"/><path fill="currentColor" d="M425 211L305 142L305 280Z"/><path d="M24 -118H-98V4M704 -118H826V4M24 806H-98V684M704 806H826V684" fill="none" stroke="currentColor" stroke-width="21"/></symbol><symbol id="ppMarkSm" viewBox="0 -20 728 728"><path fill="currentColor" d="M39 0Q62 1 98.5 2.0Q135 3 171 3Q219 3 262.5 2.0Q306 1 324 1Q451 1 514.0 56.0Q577 111 577 198Q577 234 564.5 273.5Q552 313 521.0 346.5Q490 380 437.0 401.0Q384 422 302 422H204V402H292Q359 402 394.5 375.0Q430 348 442.5 304.0Q455 260 455 209Q455 114 421.0 67.0Q387 20 303 20Q260 20 246.5 37.0Q233 54 233 106V600Q233 637 241.0 655.5Q249 674 271.0 680.0Q293 686 336 687V708Q309 706 266.0 705.5Q223 705 177 705Q137 705 100.5 705.5Q64 706 39 708V688Q73 686 90.0 680.0Q107 674 112.5 656.0Q118 638 118 602V106Q118 69 112.5 51.5Q107 34 89.5 27.5Q72 21 39 20Z"/><path fill="currentColor" d="M425 211L305 142L305 280Z"/></symbol></svg>
 
-<nav>
-  <a href="#" class="nav-logo">Pappagallo</a>
+<!-- Preloader · film leader -->
+<div id="preloader" aria-hidden="true">
+  <div class="pl-cross-h"></div>
+  <div class="pl-cross-v"></div>
+  <span class="pl-corner tl">Pappagallo</span>
+  <span class="pl-corner tr">Roma · 41.9°N</span>
+  <span class="pl-corner bl">4K · 25fps</span>
+  <span class="pl-corner br">EST. 2016</span>
+  <div class="pl-stage">
+    <div class="pl-sweep"></div>
+    <svg viewBox="0 0 100 100">
+      <circle class="pl-circle-bg" cx="50" cy="50" r="48"></circle>
+      <circle class="pl-circle-fg" id="plArc" cx="50" cy="50" r="48"></circle>
+    </svg>
+    <div class="pl-count" id="plCount">3</div>
+    <div class="pl-brand"><svg class="logo-mark lm-pre" aria-hidden="true"><use href="#ppMarkSm"/></svg><b>Pappagallo</b> — Visual stories</div>
+  </div>
+</div>
+<div class="curtain top"></div>
+<div class="curtain bottom"></div>
+
+<div id="progress"></div>
+<div class="grain" aria-hidden="true"></div>
+<div id="cur"></div>
+<div id="curRing"><span id="curLabel">View</span></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <a href="#" class="nav-logo"><svg class="logo-mark lm-nav" aria-hidden="true"><use href="#ppMarkSm"/></svg>Pappagallo</a>
   <div class="nav-right">
     <ul class="nav-links">
       <li><a href="#work" data-i18n="nav_work">Work</a></li>
@@ -924,124 +661,188 @@ footer {
       <li><a href="#services" data-i18n="nav_services">Services</a></li>
       <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
     </ul>
-    <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLang('en')">EN</button>
-      <button class="lang-btn" onclick="setLang('it')">IT</button>
-      <button class="lang-btn" onclick="setLang('es')">ES</button>
+    <div class="lang-switcher" id="langDesk">
+      <button data-lang="en" class="active">EN</button>
+      <button data-lang="it">IT</button>
+      <button data-lang="es">ES</button>
     </div>
+    <button class="burger" id="burger" aria-label="Menu">
+      <span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-ambient">
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-  </div>
-  <!-- VIDEO BACKGROUND HERO -->
-  <div style="position:absolute;inset:0;z-index:0;overflow:hidden;">
-    <div style="padding:56.25% 0 0 0;position:relative;height:100%;min-height:100%;">
-      <iframe src="https://player.vimeo.com/video/1190618718?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:50%;left:50%;width:177.78vh;min-width:100%;height:100vh;transform:translate(-50%,-50%);" title="Cupola San Pietro"></iframe>
+<!-- Mobile menu -->
+<div id="mobileMenu">
+  <ul>
+    <li><a href="#work" data-i18n="nav_work">Work</a></li>
+    <li><a href="#about" data-i18n="nav_about">About</a></li>
+    <li><a href="#services" data-i18n="nav_services">Services</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="mm-foot">
+    <div class="lang-switcher" id="langMob">
+      <button data-lang="en" class="active">EN</button>
+      <button data-lang="it">IT</button>
+      <button data-lang="es">ES</button>
     </div>
-    <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(6,6,10,0.15) 0%, rgba(6,6,10,0.05) 40%, rgba(6,6,10,0.4) 100%);"></div>
+    <a class="mm-mail" href="mailto:manuele.pappagallo@gmail.com">manuele.pappagallo@gmail.com</a>
   </div>
-  <script src="https://player.vimeo.com/api/player.js"></script>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" style="padding:0">
+  <div class="hero-video">
+    <div class="vwrap" id="heroVwrap">
+      <iframe src="https://player.vimeo.com/video/1190618718?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
+        allow="autoplay; fullscreen; picture-in-picture" title="St. Peter's Dome — Rome"></iframe>
+    </div>
+    <div class="hero-shade"></div>
+    <div class="hero-vignette"></div>
+    <div class="hero-orb o1"></div>
+    <div class="hero-orb o2"></div>
+  </div>
+
   <div class="hero-content">
-    <div class="hero-label" data-i18n="hero_label">Rome-based filmmaker</div>
+    <div class="hero-label"><span class="line"></span><span data-i18n="hero_label">Rome-based filmmaker</span></div>
     <h1 class="hero-headline">
-      Visual<br>
-      <em>stories.</em><br>
-      No words<br>needed.
+      <span class="hl-mask"><span class="hl" data-i18n="hl1">Visual</span></span>
+      <span class="hl-mask"><span class="hl"><em data-i18n="hl2">stories.</em></span></span>
+      <span class="hl-mask"><span class="hl" data-i18n="hl3">No words</span></span>
+      <span class="hl-mask"><span class="hl" data-i18n="hl4">needed.</span></span>
     </h1>
   </div>
+
   <div class="hero-bottom">
-    <div class="hero-sub" data-i18n="hero_sub">
-      Broadcast · Corporate<br>
-      Social · Documentary
-    </div>
-    <div class="hero-cta">
-      <a href="#work" class="btn-outline" data-i18n="hero_cta">View work</a>
+    <div class="hero-meta" data-i18n="hero_meta">Broadcast · Corporate
+Social · Documentary</div>
+    <div class="hero-cta-wrap">
+      <a href="#work" class="btn magnetic" data-cursor="link"><span data-i18n="hero_cta">View work</span><span class="arr">→</span></a>
     </div>
   </div>
-  <div class="hero-scroll-indicator">
-    <div class="scroll-line"></div>
-    <span class="scroll-text" data-i18n="scroll">Scroll</span>
+
+  <div class="hero-scroll">
+    <div class="wire"></div>
+    <span data-i18n="hero_scroll">Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="mq-track">
+    <div class="mq-group">
+      <span class="mq-item">RSI</span><span class="mq-sep">✦</span>
+      <span class="mq-item">SRF</span><span class="mq-sep">✦</span>
+      <span class="mq-item">RAI</span><span class="mq-sep">✦</span>
+      <span class="mq-item">RTL4</span><span class="mq-sep">✦</span>
+      <span class="mq-item">Antena 3</span><span class="mq-sep">✦</span>
+    </div>
+    <div class="mq-group">
+      <span class="mq-item">RSI</span><span class="mq-sep">✦</span>
+      <span class="mq-item">SRF</span><span class="mq-sep">✦</span>
+      <span class="mq-item">RAI</span><span class="mq-sep">✦</span>
+      <span class="mq-item">RTL4</span><span class="mq-sep">✦</span>
+      <span class="mq-item">Antena 3</span><span class="mq-sep">✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- SHOWREEL -->
+<section id="work">
+  <div class="sec-head reveal">
+    <span class="sec-num">I.</span>
+    <span class="sec-label" data-i18n="sec_reel">Showreel</span>
+  </div>
+
+  <div class="reel reveal" data-cursor="view">
+    <div class="reel-clip">
+      <iframe src="https://player.vimeo.com/video/1190618718?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
+        allow="autoplay; fullscreen; picture-in-picture" title="St. Peter's Dome — Rome"></iframe>
+      <span class="reel-tag tl">4K · Cinematic</span>
+      <span class="reel-tag tr">PAPPAGALLO</span>
+      <span class="reel-tag bl">St. Peter's Dome · Rome</span>
+      <span class="reel-tag br">2026</span>
+    </div>
+  </div>
+  <div class="reel-status">
+    <span class="rec"><span class="rec-dot"></span>REC</span>
+    <span id="tc">00:00:00:00</span>
+    <span>25 fps · PAL · Rome</span>
+  </div>
+
+  <div class="reel reveal" data-cursor="view">
+    <div class="reel-clip">
+      <iframe loading="lazy" src="https://player.vimeo.com/video/1190616900?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
+        allow="autoplay; fullscreen; picture-in-picture" title="Vatican — Rome"></iframe>
+      <span class="reel-tag tl">4K · Cinematic</span>
+      <span class="reel-tag tr">PAPPAGALLO</span>
+      <span class="reel-tag bl">Vatican · Rome</span>
+      <span class="reel-tag br">2026</span>
+    </div>
+  </div>
+
+  <div class="reel reveal" data-cursor="view" style="margin-top:3px">
+    <div class="reel-clip">
+      <iframe loading="lazy" src="https://player.vimeo.com/video/1190614015?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
+        allow="autoplay; fullscreen; picture-in-picture" title="Aerial Timelapse 4K"></iframe>
+      <span class="reel-tag tl">4K · Timelapse · Drone</span>
+      <span class="reel-tag tr">PAPPAGALLO</span>
+      <span class="reel-tag bl">Salto di Fondi · Lazio</span>
+      <span class="reel-tag br">Aerial · 2026</span>
+    </div>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<!-- SHOWREEL -->
-<section class="showreel" id="work">
-  <div class="section-header reveal">
-    <span class="section-index">I.</span>
-    <span class="section-title-sm" data-i18n="reel_label">Showreel</span>
-  </div>
-  <!-- VIDEO 2: Vaticano — contesto più ampio -->
-  <div class="reel-frame reveal" style="padding:56.25% 0 0 0; position:relative; aspect-ratio:unset; margin-bottom:3px;">
-    <iframe src="https://player.vimeo.com/video/1190616900?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Vaticano Roma"></iframe>
-    <div class="reel-corners">
-      <span class="tl" style="background:rgba(6,6,10,0.55);padding:4px 8px;">4K · Cinematic</span>
-      <span class="tr" style="background:rgba(6,6,10,0.55);padding:4px 8px;">PAPPAGALLO</span>
-      <span class="bl" style="background:rgba(6,6,10,0.55);padding:4px 8px;">Vatican · Rome</span>
-      <span class="br" style="background:rgba(6,6,10,0.55);padding:4px 8px;">2026</span>
-    </div>
-  </div>
-
-  <!-- VIDEO 3: Drone Salto di Fondi — contrasto natura/aerea -->
-  <div class="reel-frame reveal" style="padding:56.25% 0 0 0; position:relative; aspect-ratio:unset;">
-    <iframe src="https://player.vimeo.com/video/1190614015?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&loop=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Aerial Timelapse 4K"></iframe>
-    <div class="reel-corners">
-      <span class="tl" style="background:rgba(6,6,10,0.55);padding:4px 8px;">4K · Timelapse · Drone</span>
-      <span class="tr" style="background:rgba(6,6,10,0.55);padding:4px 8px;">PAPPAGALLO</span>
-      <span class="bl" style="background:rgba(6,6,10,0.55);padding:4px 8px;">Salto di Fondi · Lazio</span>
-      <span class="br" style="background:rgba(6,6,10,0.55);padding:4px 8px;">Aerial · 2026</span>
-    </div>
-  </div>
-  <script src="https://player.vimeo.com/api/player.js"></script>
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <p id="manifesto"></p>
 </section>
 
 <div class="divider"></div>
 
 <!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-text-block">
-    <div class="section-header reveal">
-      <span class="section-index">II.</span>
-      <span class="section-title-sm" data-i18n="about_sm">About</span>
+<section id="about" class="about">
+  <div class="about-bio">
+    <div class="sec-head reveal">
+      <span class="sec-num">II.</span>
+      <span class="sec-label" data-i18n="sec_about">About</span>
     </div>
-    <h2 class="display-title reveal" data-i18n="about_title">The eye<br>behind the <em>frame.</em></h2>
-    <p class="body-text reveal" data-i18n="about_p1">Videomaker and filmmaker based in Rome. Ten years shooting for international broadcasters — RSI, SRF, RAI, RTL4, Antena 3. Stories told without borders, without language barriers.</p>
-    <p class="body-text reveal" data-i18n="about_p2">Every frame is a choice. Every cut is a declaration. Visual storytelling that travels the world without needing a translation.</p>
+    <h2 class="h2 reveal" style="margin-bottom:40px">
+      <span data-i18n="about_h1">The eye</span><br>
+      <span data-i18n="about_h2">behind the</span> <em data-i18n="about_h3">frame.</em>
+    </h2>
+    <p class="reveal" data-i18n="about_p1">Videomaker and filmmaker based in Rome. Ten years shooting for international broadcasters — RSI, SRF, RAI, RTL4, Antena 3. Stories told without borders, without language barriers.</p>
+    <p class="reveal" data-i18n="about_p2">Visual storytelling that travels the world without needing a translation.</p>
     <div class="about-stats reveal">
       <div>
-        <span class="stat-num">10+</span>
-        <span class="stat-label" data-i18n="stat_years">Years</span>
+        <span class="stat-num" data-count="10" data-suffix="+">0+</span>
+        <span class="stat-lab" data-i18n="stat_years">Years</span>
       </div>
       <div>
-        <span class="stat-num">5</span>
-        <span class="stat-label" data-i18n="stat_nets">Networks</span>
+        <span class="stat-num" data-count="5" data-suffix="">0</span>
+        <span class="stat-lab" data-i18n="stat_networks">Networks</span>
       </div>
       <div>
-        <span class="stat-num">3</span>
-        <span class="stat-label" data-i18n="stat_lang">Languages</span>
+        <span class="stat-num" data-count="3" data-suffix="">0</span>
+        <span class="stat-lab" data-i18n="stat_languages">Languages</span>
       </div>
     </div>
   </div>
-  <div class="about-visual-col reveal">
-    <div class="portrait-frame">
-      <div class="portrait-inner">
-        <div class="monogram">MP</div>
-        <div class="portrait-caption">Roma · Italia</div>
+
+  <div class="about-visual reveal">
+    <div class="portrait" id="portrait">
+      <div class="inner">
+        <svg class="logo-mark lm-portrait" aria-hidden="true"><use href="#ppMark"/></svg>
+        <div class="loc">Roma · Italia</div>
       </div>
-      <div class="portrait-badge" data-i18n="portrait_badge">Available worldwide</div>
+      <div class="badge" data-i18n="about_badge">Available worldwide</div>
     </div>
     <div class="clients-strip">
-      <span class="client-name">RSI</span>
-      <span class="client-name">SRF</span>
-      <span class="client-name">RAI</span>
-      <span class="client-name">RTL4</span>
-      <span class="client-name">Antena 3</span>
+      <span>RSI</span><span>SRF</span><span>RAI</span><span>RTL4</span><span>Antena 3</span>
     </div>
   </div>
 </section>
@@ -1049,72 +850,84 @@ footer {
 <div class="divider"></div>
 
 <!-- PORTFOLIO -->
-<section class="portfolio">
-  <div class="portfolio-head">
-    <div class="section-header reveal">
-      <span class="section-index">III.</span>
-      <span class="section-title-sm" data-i18n="port_sm">Selected work</span>
+<section id="portfolio">
+  <div class="pf-head">
+    <div class="sec-head reveal">
+      <span class="sec-num">III.</span>
+      <span class="sec-label" data-i18n="sec_work">Selected work</span>
     </div>
-    <div class="filters reveal">
-      <button class="filter-btn active" data-i18n="f_all">All</button>
-      <button class="filter-btn" data-i18n="f_bc">Broadcast</button>
-      <button class="filter-btn" data-i18n="f_co">Corporate</button>
-      <button class="filter-btn" data-i18n="f_so">Social</button>
+    <div class="pf-filters reveal">
+      <button class="active" data-filter="all" data-i18n="f_all">All</button>
+      <button data-filter="broadcast">Broadcast</button>
+      <button data-filter="corporate">Corporate</button>
+      <button data-filter="social">Social</button>
     </div>
   </div>
-  <div class="portfolio-grid reveal">
-    <div class="pitem">
-      <div class="pitem-bg"><div class="pitem-watermark">RSI · 2026</div></div>
-      <div class="pitem-num">01</div>
+
+  <div class="pgrid reveal" id="pgrid">
+    <div class="pitem span8 tilt" data-cat="broadcast" data-cursor="view">
+      <div class="pitem-bg"><div class="pitem-wm">RSI · 2026</div></div>
+      <div class="pitem-spot"></div>
+      <span class="pitem-num">01</span>
       <div class="pitem-overlay">
         <div class="pitem-client">RSI · Swiss Public Broadcasting</div>
         <div class="pitem-title" data-i18n="p1">Rome Cultural Report</div>
-        <div class="pitem-type" data-i18n="pt_bc">Broadcast · Documentary</div>
+        <div class="pitem-type" data-i18n="pt_bc">Broadcast</div>
       </div>
     </div>
-    <div class="pitem">
-      <div class="pitem-bg"><div class="pitem-watermark">SRF · 2026</div></div>
-      <div class="pitem-num">02</div>
+
+    <div class="pitem span4 tilt" data-cat="broadcast" data-cursor="view">
+      <div class="pitem-bg"><div class="pitem-wm">SRF · 2026</div></div>
+      <div class="pitem-spot"></div>
+      <span class="pitem-num">02</span>
       <div class="pitem-overlay">
         <div class="pitem-client">SRF · Swiss Broadcasting</div>
         <div class="pitem-title" data-i18n="p2">Urban Perspectives</div>
-        <div class="pitem-type" data-i18n="pt_bc">Broadcast · News</div>
+        <div class="pitem-type" data-i18n="pt_bc2">Broadcast</div>
       </div>
     </div>
-    <div class="pitem">
-      <div class="pitem-bg"><div class="pitem-watermark">Corporate · 2026</div></div>
-      <div class="pitem-num">03</div>
+
+    <div class="pitem span4 tilt" data-cat="corporate" data-cursor="view">
+      <div class="pitem-bg"><div class="pitem-wm">Corporate · 2026</div></div>
+      <div class="pitem-spot"></div>
+      <span class="pitem-num">03</span>
       <div class="pitem-overlay">
-        <div class="pitem-client" data-i18n="pc_corp">Corporate Client</div>
+        <div class="pitem-client" data-i18n="pc3">Corporate Client</div>
         <div class="pitem-title" data-i18n="p3">Brand Film</div>
-        <div class="pitem-type" data-i18n="pt_co">Corporate · Brand</div>
+        <div class="pitem-type" data-i18n="pt_corp">Corporate · Brand</div>
       </div>
     </div>
-    <div class="pitem">
-      <div class="pitem-bg"><div class="pitem-watermark">RAI · 2025</div></div>
-      <div class="pitem-num">04</div>
+
+    <div class="pitem span8 tilt" data-cat="broadcast" data-cursor="view">
+      <div class="pitem-bg"><div class="pitem-wm">RAI · 2025</div></div>
+      <div class="pitem-spot"></div>
+      <span class="pitem-num">04</span>
       <div class="pitem-overlay">
         <div class="pitem-client">RAI · Italian Broadcasting</div>
         <div class="pitem-title" data-i18n="p4">Roma Eterna</div>
-        <div class="pitem-type" data-i18n="pt_bc">Broadcast · Documentary</div>
+        <div class="pitem-type" data-i18n="pt_bc3">Broadcast</div>
       </div>
     </div>
-    <div class="pitem">
-      <div class="pitem-bg"><div class="pitem-watermark">Social · 2026</div></div>
-      <div class="pitem-num">05</div>
+
+    <div class="pitem span6 tilt" data-cat="social" data-cursor="view">
+      <div class="pitem-bg"><div class="pitem-wm">Social · 2026</div></div>
+      <div class="pitem-spot"></div>
+      <span class="pitem-num">05</span>
       <div class="pitem-overlay">
-        <div class="pitem-client" data-i18n="pc_soc">Social Content</div>
+        <div class="pitem-client" data-i18n="pc5">Social Content</div>
         <div class="pitem-title" data-i18n="p5">Golden Hour Roma</div>
-        <div class="pitem-type" data-i18n="pt_so">Social · Cinematic</div>
+        <div class="pitem-type" data-i18n="pt_soc">Social · Cinematic</div>
       </div>
     </div>
-    <div class="pitem">
-      <div class="pitem-bg"><div class="pitem-watermark">Antena 3 · 2025</div></div>
-      <div class="pitem-num">06</div>
+
+    <div class="pitem span6 tilt" data-cat="broadcast" data-cursor="view">
+      <div class="pitem-bg"><div class="pitem-wm">Antena 3 · 2025</div></div>
+      <div class="pitem-spot"></div>
+      <span class="pitem-num">06</span>
       <div class="pitem-overlay">
         <div class="pitem-client">Antena 3 · Spanish Broadcasting</div>
         <div class="pitem-title" data-i18n="p6">La Dolce Vita</div>
-        <div class="pitem-type" data-i18n="pt_bc">Broadcast · Feature</div>
+        <div class="pitem-type" data-i18n="pt_bc4">Broadcast</div>
       </div>
     </div>
   </div>
@@ -1123,36 +936,37 @@ footer {
 <div class="divider"></div>
 
 <!-- SERVICES -->
-<section class="services" id="services">
-  <div class="section-header reveal">
-    <span class="section-index">IV.</span>
-    <span class="section-title-sm" data-i18n="srv_sm">Services</span>
+<section id="services">
+  <div class="sec-head reveal">
+    <span class="sec-num">IV.</span>
+    <span class="sec-label" data-i18n="sec_services">Services</span>
   </div>
-  <h2 class="display-title reveal" data-i18n="srv_title">What I<br><em>deliver.</em></h2>
-  <div class="services-grid">
-    <div class="service reveal">
-      <div class="service-idx">01</div>
-      <div class="service-name" data-i18n="s1n">Broadcast & News</div>
-      <p class="service-desc" data-i18n="s1d">Camera operator and editor for international TV networks. ENG shooting, live events, documentary. Rome-based, available worldwide.</p>
-      <div class="service-price" data-i18n="s1p">On request <small>/ day rate</small></div>
+  <h2 class="h2 reveal"><span data-i18n="svc_h1">What I</span><br><em data-i18n="svc_h2">deliver.</em></h2>
+
+  <div class="svc-grid">
+    <div class="svc reveal spot">
+      <div class="svc-idx">01</div>
+      <div class="svc-name" data-i18n="s1n">Broadcast &amp; News</div>
+      <p class="svc-desc" data-i18n="s1d">Camera operator and editor for international TV networks. ENG shooting, live events, documentary. Rome-based, available worldwide.</p>
+      <div class="svc-price"><span data-i18n="s1p">On request</span><small data-i18n="s1u">/ day rate</small></div>
     </div>
-    <div class="service reveal">
-      <div class="service-idx">02</div>
-      <div class="service-name" data-i18n="s2n">Corporate Video</div>
-      <p class="service-desc" data-i18n="s2d">Brand films, product videos, institutional content. Full production from concept to delivery. Tailored for international audiences.</p>
-      <div class="service-price" data-i18n="s2p">On request <small>/ project</small></div>
+    <div class="svc reveal spot" data-delay="1">
+      <div class="svc-idx">02</div>
+      <div class="svc-name" data-i18n="s2n">Corporate Video</div>
+      <p class="svc-desc" data-i18n="s2d">Brand films, product videos, institutional content. Full production from concept to delivery. Tailored for international audiences.</p>
+      <div class="svc-price"><span data-i18n="s2p">On request</span><small data-i18n="s2u">/ project</small></div>
     </div>
-    <div class="service reveal">
-      <div class="service-idx">03</div>
-      <div class="service-name" data-i18n="s3n">Social Content</div>
-      <p class="service-desc" data-i18n="s3d">Cinematic short-form for Instagram, TikTok, YouTube. Visual storytelling without language barriers — built to travel globally.</p>
-      <div class="service-price" data-i18n="s3p">On request <small>/ package</small></div>
+    <div class="svc reveal spot" data-delay="1">
+      <div class="svc-idx">03</div>
+      <div class="svc-name" data-i18n="s3n">Social Content</div>
+      <p class="svc-desc" data-i18n="s3d">Cinematic short-form for Instagram, TikTok, YouTube. Visual storytelling without language barriers — built to travel globally.</p>
+      <div class="svc-price"><span data-i18n="s3p">On request</span><small data-i18n="s3u">/ package</small></div>
     </div>
-    <div class="service reveal">
-      <div class="service-idx">04</div>
-      <div class="service-name" data-i18n="s4n">Aerial Footage</div>
-      <p class="service-desc" data-i18n="s4d">Drone cinematography in natural and rural locations around Rome — Lazio coast, Castelli Romani, Appia Antica, countryside. 4K available.</p>
-      <div class="service-price" data-i18n="s4p">On request <small>/ add-on</small></div>
+    <div class="svc reveal spot" data-delay="2">
+      <div class="svc-idx">04</div>
+      <div class="svc-name" data-i18n="s4n">Aerial Footage</div>
+      <p class="svc-desc" data-i18n="s4d">Drone cinematography in natural and rural locations around Rome — Lazio coast, Castelli Romani, Appia Antica, countryside. 4K available.</p>
+      <div class="svc-price"><span data-i18n="s4p">On request</span><small data-i18n="s4u">/ add-on</small></div>
     </div>
   </div>
 </section>
@@ -1160,205 +974,521 @@ footer {
 <div class="divider"></div>
 
 <!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="contact-left">
-    <div class="section-header reveal">
-      <span class="section-index">V.</span>
-      <span class="section-title-sm" data-i18n="ct_sm">Contact</span>
+<section id="contact" class="contact">
+  <div>
+    <div class="sec-head reveal">
+      <span class="sec-num">V.</span>
+      <span class="sec-label" data-i18n="sec_contact">Contact</span>
     </div>
-    <h2 class="contact-headline reveal">
-      Let's make<br>something
-      <em>unforgettable.</em>
+    <h2 class="h2 reveal" style="margin-bottom:52px">
+      <span data-i18n="c_h1">Let's make</span><br>
+      <span data-i18n="c_h2">something</span><br>
+      <em data-i18n="c_h3">unforgettable.</em>
     </h2>
-    <div class="contact-details reveal">
-      <div class="contact-row">
-        <span class="contact-key" data-i18n="ck_base">Base</span>
-        <span class="contact-val">Rome, Italy</span>
-      </div>
-      <div class="contact-row">
-        <span class="contact-key" data-i18n="ck_avail">Available</span>
-        <span class="contact-val" data-i18n="cv_avail">Worldwide</span>
-      </div>
-      <div class="contact-row">
-        <span class="contact-key">LinkedIn</span>
-        <span class="contact-val"><a href="https://linkedin.com/in/manuele-pappagallo" target="_blank">manuele-pappagallo</a></span>
-      </div>
-      <div class="contact-row">
-        <span class="contact-key">Email</span>
-        <span class="contact-val"><a href="mailto:manuele.pappagallo@gmail.com">manuele.pappagallo@gmail.com</a></span>
-      </div>
+    <div class="c-rows reveal">
+      <div class="c-row"><span class="c-key" data-i18n="c_base">Base</span><span class="c-val" data-i18n="c_base_v">Rome, Italy</span></div>
+      <div class="c-row"><span class="c-key" data-i18n="c_avail">Available</span><span class="c-val" data-i18n="c_avail_v">Worldwide</span></div>
+      <div class="c-row"><span class="c-key">LinkedIn</span><span class="c-val"><a href="https://linkedin.com/in/manuele-pappagallo" target="_blank" rel="noopener noreferrer" data-cursor="link">manuele-pappagallo</a></span></div>
+      <div class="c-row"><span class="c-key">Email</span><span class="c-val"><a href="mailto:manuele.pappagallo@gmail.com" data-cursor="link">manuele.pappagallo@gmail.com</a></span></div>
     </div>
   </div>
-  <form class="contact-form reveal" onsubmit="return false;">
+
+  <form class="cform reveal" id="contactForm">
     <div class="field">
-      <label data-i18n="fl_name">Name</label>
-      <input type="text" />
+      <label for="fName" data-i18n="f_name">Name</label>
+      <input type="text" id="fName" name="name" autocomplete="name">
+      <span class="fline"></span>
     </div>
     <div class="field">
-      <label data-i18n="fl_co">Company</label>
-      <input type="text" />
+      <label for="fCompany" data-i18n="f_company">Company</label>
+      <input type="text" id="fCompany" name="company" autocomplete="organization">
+      <span class="fline"></span>
     </div>
     <div class="field">
-      <label data-i18n="fl_srv">Service</label>
-      <select>
-        <option data-i18n="fo_bc">Broadcast & News</option>
-        <option data-i18n="fo_co">Corporate Video</option>
-        <option data-i18n="fo_so">Social Content</option>
-        <option data-i18n="fo_ot">Other</option>
+      <label for="fService" data-i18n="f_service">Service</label>
+      <select id="fService" name="service">
+        <option value="Broadcast &amp; News" data-i18n="s1n">Broadcast &amp; News</option>
+        <option value="Corporate Video" data-i18n="s2n">Corporate Video</option>
+        <option value="Social Content" data-i18n="s3n">Social Content</option>
+        <option value="Other" data-i18n="f_other">Other</option>
       </select>
+      <span class="fline"></span>
     </div>
     <div class="field">
-      <label data-i18n="fl_msg">Message</label>
-      <textarea></textarea>
+      <label for="fMsg" data-i18n="f_message">Message</label>
+      <textarea id="fMsg" name="message" rows="4"></textarea>
+      <span class="fline"></span>
     </div>
-    <button class="send-btn" data-i18n="fl_sub">Send message</button>
+    <button type="submit" class="btn magnetic" data-cursor="link">
+      <span data-i18n="f_send">Send message</span><span class="arr">→</span>
+    </button>
+    <span class="form-note" data-i18n="f_note">Opens your email app — no data stored.</span>
   </form>
 </section>
 
+</main>
+
 <footer>
-  <div class="footer-logo">Pappagallo</div>
-  <div class="footer-copy">© 2026 Manuele Pappagallo · Rome, Italy</div>
-  <div class="footer-links">
-    <a href="https://linkedin.com/in/manuele-pappagallo" target="_blank">LinkedIn</a>
-    <a href="https://instagram.com" target="_blank">Instagram</a>
-    <a href="https://vimeo.com" target="_blank">Vimeo</a>
+  <div class="f-brand"><svg class="logo-mark lm-foot" aria-hidden="true"><use href="#ppMarkSm"/></svg>Pappagallo</div>
+  <div class="f-mid">
+    <span class="f-copy">© 2026 Manuele Pappagallo · Rome, Italy</span>
+    <span class="f-clock"><span data-i18n="f_clock">Local time — Rome</span> · <span id="romeClock">--:--:--</span></span>
+  </div>
+  <div class="f-links">
+    <a href="https://linkedin.com/in/manuele-pappagallo" target="_blank" rel="noopener noreferrer" data-cursor="link">LinkedIn</a>
+    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" data-cursor="link">Instagram</a>
+    <a href="https://vimeo.com" target="_blank" rel="noopener noreferrer" data-cursor="link">Vimeo</a>
+    <button id="toTop" aria-label="Back to top" data-cursor="link">↑</button>
   </div>
 </footer>
 
+<script src="https://player.vimeo.com/api/player.js" defer></script>
 <script>
+(function(){
+"use strict";
 
-// CURSOR
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx + 'px';
-  cursor.style.top = my + 'px';
+/* ---------- Environment ---------- */
+var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var fine = window.matchMedia("(pointer: fine)").matches;
+var winH = window.innerHeight;
+window.addEventListener("resize", function(){ winH = window.innerHeight; });
+
+/* ---------- Translations ---------- */
+var t = {
+en:{
+  nav_work:"Work", nav_about:"About", nav_services:"Services", nav_contact:"Contact",
+  hero_label:"Rome-based filmmaker",
+  hl1:"Visual", hl2:"stories.", hl3:"No words", hl4:"needed.",
+  hero_meta:"Broadcast · Corporate\nSocial · Documentary",
+  hero_cta:"View work", hero_scroll:"Scroll",
+  sec_reel:"Showreel",
+  manifesto:"Every *frame* is a choice. Every *cut* is a declaration.",
+  sec_about:"About",
+  about_h1:"The eye", about_h2:"behind the", about_h3:"frame.",
+  about_p1:"Videomaker and filmmaker based in Rome. Ten years shooting for international broadcasters — RSI, SRF, RAI, RTL4, Antena 3. Stories told without borders, without language barriers.",
+  about_p2:"Visual storytelling that travels the world without needing a translation.",
+  stat_years:"Years", stat_networks:"Networks", stat_languages:"Languages",
+  about_badge:"Available worldwide",
+  sec_work:"Selected work", f_all:"All",
+  p1:"Rome Cultural Report", pt_bc:"Broadcast",
+  p2:"Urban Perspectives", pt_bc2:"Broadcast",
+  pc3:"Corporate Client", p3:"Brand Film", pt_corp:"Corporate · Brand",
+  p4:"Roma Eterna", pt_bc3:"Broadcast",
+  pc5:"Social Content", p5:"Golden Hour Roma", pt_soc:"Social · Cinematic",
+  p6:"La Dolce Vita", pt_bc4:"Broadcast",
+  sec_services:"Services", svc_h1:"What I", svc_h2:"deliver.",
+  s1n:"Broadcast & News",
+  s1d:"Camera operator and editor for international TV networks. ENG shooting, live events, documentary. Rome-based, available worldwide.",
+  s1p:"On request", s1u:"/ day rate",
+  s2n:"Corporate Video",
+  s2d:"Brand films, product videos, institutional content. Full production from concept to delivery. Tailored for international audiences.",
+  s2p:"On request", s2u:"/ project",
+  s3n:"Social Content",
+  s3d:"Cinematic short-form for Instagram, TikTok, YouTube. Visual storytelling without language barriers — built to travel globally.",
+  s3p:"On request", s3u:"/ package",
+  s4n:"Aerial Footage",
+  s4d:"Drone cinematography in natural and rural locations around Rome — Lazio coast, Castelli Romani, Appia Antica, countryside. 4K available.",
+  s4p:"On request", s4u:"/ add-on",
+  sec_contact:"Contact", c_h1:"Let's make", c_h2:"something", c_h3:"unforgettable.",
+  c_base:"Base", c_base_v:"Rome, Italy", c_avail:"Available", c_avail_v:"Worldwide",
+  f_name:"Name", f_company:"Company", f_service:"Service", f_other:"Other",
+  f_message:"Message", f_send:"Send message",
+  f_note:"Opens your email app — no data stored.",
+  f_clock:"Local time — Rome",
+  mail_subject:"Project inquiry"
+},
+it:{
+  nav_work:"Lavori", nav_about:"Chi sono", nav_services:"Servizi", nav_contact:"Contatti",
+  hero_label:"Filmmaker con base a Roma",
+  hl1:"Storie", hl2:"visive.", hl3:"Senza", hl4:"parole.",
+  hero_meta:"Broadcast · Corporate\nSocial · Documentari",
+  hero_cta:"Guarda i lavori", hero_scroll:"Scorri",
+  sec_reel:"Showreel",
+  manifesto:"Ogni *inquadratura* è una scelta. Ogni *stacco* è una dichiarazione.",
+  sec_about:"Chi sono",
+  about_h1:"L'occhio", about_h2:"dietro", about_h3:"l'inquadratura.",
+  about_p1:"Videomaker e filmmaker con base a Roma. Dieci anni di riprese per broadcaster internazionali — RSI, SRF, RAI, RTL4, Antena 3. Storie raccontate senza confini, senza barriere linguistiche.",
+  about_p2:"Visual storytelling che viaggia nel mondo senza bisogno di traduzione.",
+  stat_years:"Anni", stat_networks:"Network", stat_languages:"Lingue",
+  about_badge:"Disponibile ovunque",
+  sec_work:"Lavori selezionati", f_all:"Tutti",
+  p1:"Reportage culturale da Roma", pt_bc:"Broadcast",
+  p2:"Prospettive urbane", pt_bc2:"Broadcast",
+  pc3:"Cliente corporate", p3:"Brand film", pt_corp:"Corporate · Brand",
+  p4:"Roma Eterna", pt_bc3:"Broadcast",
+  pc5:"Contenuti social", p5:"Golden Hour Roma", pt_soc:"Social · Cinematico",
+  p6:"La Dolce Vita", pt_bc4:"Broadcast",
+  sec_services:"Servizi", svc_h1:"Cosa", svc_h2:"consegno.",
+  s1n:"Broadcast & News",
+  s1d:"Operatore di camera e montatore per network TV internazionali. Riprese ENG, eventi live, documentari. Base a Roma, disponibile ovunque.",
+  s1p:"Su richiesta", s1u:"/ a giornata",
+  s2n:"Video Corporate",
+  s2d:"Brand film, video di prodotto, contenuti istituzionali. Produzione completa dal concept alla consegna. Pensati per un pubblico internazionale.",
+  s2p:"Su richiesta", s2u:"/ a progetto",
+  s3n:"Contenuti Social",
+  s3d:"Short-form cinematografico per Instagram, TikTok, YouTube. Visual storytelling senza barriere linguistiche — fatto per viaggiare.",
+  s3p:"Su richiesta", s3u:"/ a pacchetto",
+  s4n:"Riprese Aeree",
+  s4d:"Riprese con drone in location naturali e rurali intorno a Roma — litorale laziale, Castelli Romani, Appia Antica, campagna. Disponibili in 4K.",
+  s4p:"Su richiesta", s4u:"/ extra",
+  sec_contact:"Contatti", c_h1:"Creiamo", c_h2:"qualcosa di", c_h3:"indimenticabile.",
+  c_base:"Base", c_base_v:"Roma, Italia", c_avail:"Disponibile", c_avail_v:"In tutto il mondo",
+  f_name:"Nome", f_company:"Azienda", f_service:"Servizio", f_other:"Altro",
+  f_message:"Messaggio", f_send:"Invia messaggio",
+  f_note:"Apre la tua app email — nessun dato salvato.",
+  f_clock:"Ora locale — Roma",
+  mail_subject:"Richiesta progetto"
+},
+es:{
+  nav_work:"Trabajos", nav_about:"Sobre mí", nav_services:"Servicios", nav_contact:"Contacto",
+  hero_label:"Filmmaker con base en Roma",
+  hl1:"Historias", hl2:"visuales.", hl3:"Sin", hl4:"palabras.",
+  hero_meta:"Broadcast · Corporate\nSocial · Documental",
+  hero_cta:"Ver trabajos", hero_scroll:"Desliza",
+  sec_reel:"Showreel",
+  manifesto:"Cada *plano* es una elección. Cada *corte* es una declaración.",
+  sec_about:"Sobre mí",
+  about_h1:"El ojo", about_h2:"detrás del", about_h3:"encuadre.",
+  about_p1:"Videomaker y filmmaker con base en Roma. Diez años filmando para cadenas internacionales — RSI, SRF, RAI, RTL4, Antena 3. Historias contadas sin fronteras, sin barreras de idioma.",
+  about_p2:"Narración visual que viaja por el mundo sin necesidad de traducción.",
+  stat_years:"Años", stat_networks:"Cadenas", stat_languages:"Idiomas",
+  about_badge:"Disponible en todo el mundo",
+  sec_work:"Trabajos seleccionados", f_all:"Todos",
+  p1:"Reportaje cultural desde Roma", pt_bc:"Broadcast",
+  p2:"Perspectivas urbanas", pt_bc2:"Broadcast",
+  pc3:"Cliente corporativo", p3:"Brand film", pt_corp:"Corporate · Brand",
+  p4:"Roma Eterna", pt_bc3:"Broadcast",
+  pc5:"Contenido social", p5:"Golden Hour Roma", pt_soc:"Social · Cinematográfico",
+  p6:"La Dolce Vita", pt_bc4:"Broadcast",
+  sec_services:"Servicios", svc_h1:"Lo que", svc_h2:"entrego.",
+  s1n:"Broadcast & News",
+  s1d:"Operador de cámara y editor para cadenas de TV internacionales. Rodaje ENG, eventos en directo, documental. Base en Roma, disponible en todo el mundo.",
+  s1p:"Bajo petición", s1u:"/ por día",
+  s2n:"Vídeo Corporativo",
+  s2d:"Brand films, vídeos de producto, contenido institucional. Producción completa del concepto a la entrega. Pensado para audiencias internacionales.",
+  s2p:"Bajo petición", s2u:"/ por proyecto",
+  s3n:"Contenido Social",
+  s3d:"Short-form cinematográfico para Instagram, TikTok, YouTube. Narración visual sin barreras de idioma — hecho para viajar.",
+  s3p:"Bajo petición", s3u:"/ por paquete",
+  s4n:"Tomas Aéreas",
+  s4d:"Cinematografía con dron en localizaciones naturales y rurales alrededor de Roma — costa del Lacio, Castelli Romani, Appia Antica, campo. Disponible en 4K.",
+  s4p:"Bajo petición", s4u:"/ extra",
+  sec_contact:"Contacto", c_h1:"Creemos", c_h2:"algo", c_h3:"inolvidable.",
+  c_base:"Base", c_base_v:"Roma, Italia", c_avail:"Disponible", c_avail_v:"Todo el mundo",
+  f_name:"Nombre", f_company:"Empresa", f_service:"Servicio", f_other:"Otro",
+  f_message:"Mensaje", f_send:"Enviar mensaje",
+  f_note:"Abre tu app de correo — sin guardar datos.",
+  f_clock:"Hora local — Roma",
+  mail_subject:"Solicitud de proyecto"
+}};
+
+var lang = "en";
+try{ var saved = localStorage.getItem("pp_lang"); if(saved && t[saved]) lang = saved; }catch(e){}
+
+function buildManifesto(){
+  var el = document.getElementById("manifesto");
+  if(!el) return;
+  el.innerHTML = "";
+  var words = t[lang].manifesto.split(" ");
+  for(var i=0;i<words.length;i++){
+    var w = words[i], gold = false;
+    if(w.indexOf("*") !== -1){ gold = true; w = w.replace(/\*/g,""); }
+    var s = document.createElement("span");
+    s.className = "w";
+    if(gold){ var em = document.createElement("em"); em.textContent = w; s.appendChild(em); }
+    else{ s.textContent = w; }
+    el.appendChild(s);
+    el.appendChild(document.createTextNode(" "));
+  }
+  if(reduced){
+    var ws = el.querySelectorAll(".w");
+    for(var j=0;j<ws.length;j++) ws[j].style.opacity = 1;
+  }
+  manifestoWords = el.querySelectorAll(".w");
+}
+
+function setLang(l){
+  if(!t[l]) return;
+  lang = l;
+  document.documentElement.lang = l;
+  var nodes = document.querySelectorAll("[data-i18n]");
+  for(var i=0;i<nodes.length;i++){
+    var key = nodes[i].getAttribute("data-i18n");
+    if(t[l][key] !== undefined) nodes[i].textContent = t[l][key];
+  }
+  var btns = document.querySelectorAll(".lang-switcher button");
+  for(var k=0;k<btns.length;k++) btns[k].classList.toggle("active", btns[k].getAttribute("data-lang") === l);
+  try{ localStorage.setItem("pp_lang", l); }catch(e){}
+  buildManifesto();
+  applyManifesto();
+}
+document.addEventListener("click", function(e){
+  var b = e.target.closest(".lang-switcher button");
+  if(b) setLang(b.getAttribute("data-lang"));
 });
-(function animateRing() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
-  requestAnimationFrame(animateRing);
-})();
 
-// REVEAL ON SCROLL
-const observer = new IntersectionObserver(entries => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 80);
+/* ---------- Preloader · film leader ---------- */
+var pre = document.getElementById("preloader");
+var curtains = document.querySelectorAll(".curtain");
+function killIntro(){
+  document.body.classList.add("revealed");
+  if(pre) pre.classList.add("done");
+  setTimeout(function(){
+    if(pre && pre.parentNode) pre.parentNode.removeChild(pre);
+    for(var i=0;i<curtains.length;i++){ curtains[i].style.display = "none"; }
+  }, 1400);
+}
+if(reduced){
+  if(pre) pre.style.display = "none";
+  document.body.classList.add("revealed");
+  for(var ci=0;ci<curtains.length;ci++) curtains[ci].style.display = "none";
+}else{
+  var arc = document.getElementById("plArc");
+  var cnt = document.getElementById("plCount");
+  var DUR = 1800, CIRC = 301.6, t0 = null;
+  function leader(ts){
+    if(t0 === null) t0 = ts;
+    var p = Math.min((ts - t0) / DUR, 1);
+    if(arc) arc.style.strokeDashoffset = CIRC * (1 - p);
+    if(cnt){
+      var n = 3 - Math.min(2, Math.floor(p * 3));
+      if(cnt.textContent !== String(n)) cnt.textContent = n;
+    }
+    if(p < 1){ requestAnimationFrame(leader); }
+    else{ setTimeout(killIntro, 180); }
+  }
+  requestAnimationFrame(leader);
+  setTimeout(function(){ if(!document.body.classList.contains("revealed")) killIntro(); }, 4500);
+}
+
+/* ---------- Custom cursor ---------- */
+if(fine && !reduced){
+  document.body.classList.add("cursor-on");
+  var cur = document.getElementById("cur"),
+      ring = document.getElementById("curRing"),
+      label = document.getElementById("curLabel"),
+      mx = -100, my = -100, rx = -100, ry = -100;
+  document.addEventListener("mousemove", function(e){
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx + "px"; cur.style.top = my + "px";
+  });
+  (function ringLoop(){
+    rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
+    ring.style.left = rx + "px"; ring.style.top = ry + "px";
+    requestAnimationFrame(ringLoop);
+  })();
+  document.addEventListener("mouseover", function(e){
+    var v = e.target.closest("[data-cursor='view']");
+    var l = e.target.closest("a, button, select, input, textarea, [data-cursor='link']");
+    if(v){
+      ring.classList.add("is-view"); ring.classList.remove("is-link");
+      label.textContent = v.closest(".reel") ? "Play" : "View";
+    }else if(l){
+      ring.classList.add("is-link"); ring.classList.remove("is-view");
+    }else{
+      ring.classList.remove("is-view","is-link");
     }
   });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+}
 
-// FILTER BUTTONS
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+/* ---------- Nav + scroll progress + hero parallax ---------- */
+var nav = document.getElementById("nav");
+var bar = document.getElementById("progress");
+var vwrap = document.getElementById("heroVwrap");
+var ticking = false;
+function onScroll(){
+  if(ticking) return;
+  ticking = true;
+  requestAnimationFrame(function(){
+    var y = window.scrollY || window.pageYOffset;
+    var h = document.documentElement.scrollHeight - winH;
+    if(bar) bar.style.transform = "scaleX(" + (h > 0 ? y / h : 0) + ")";
+    if(nav) nav.classList.toggle("scrolled", y > 60);
+    if(vwrap && fine && !reduced && y < winH * 1.2){
+      vwrap.style.transform = "translateY(" + (y * 0.22) + "px)";
+    }
+    applyManifesto();
+    ticking = false;
+  });
+}
+window.addEventListener("scroll", onScroll, {passive:true});
+
+/* ---------- Manifesto scroll reveal ---------- */
+var manifestoWords = [];
+function applyManifesto(){
+  if(reduced || !manifestoWords.length) return;
+  for(var i=0;i<manifestoWords.length;i++){
+    var r = manifestoWords[i].getBoundingClientRect();
+    var p = (winH * 0.85 - r.top) / (winH * 0.45);
+    p = Math.max(0, Math.min(1, p));
+    manifestoWords[i].style.opacity = 0.12 + 0.88 * p;
+  }
+}
+
+/* ---------- Reveal on scroll ---------- */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(en.isIntersecting){ en.target.classList.add("visible"); io.unobserve(en.target); }
+  });
+}, {threshold:0.15});
+document.querySelectorAll(".reveal, .reel").forEach(function(el){ io.observe(el); });
+
+/* ---------- Animated counters ---------- */
+function easeOut(x){ return 1 - Math.pow(1 - x, 3); }
+var cio = new IntersectionObserver(function(entries){
+  entries.forEach(function(en){
+    if(!en.isIntersecting) return;
+    cio.unobserve(en.target);
+    var el = en.target,
+        target = parseInt(el.getAttribute("data-count"), 10),
+        suf = el.getAttribute("data-suffix") || "";
+    if(reduced){ el.textContent = target + suf; return; }
+    var s = null, D = 1400;
+    function step(ts){
+      if(s === null) s = ts;
+      var p = Math.min((ts - s) / D, 1);
+      el.textContent = Math.round(target * easeOut(p)) + suf;
+      if(p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}, {threshold:0.6});
+document.querySelectorAll(".stat-num").forEach(function(el){ cio.observe(el); });
+
+/* ---------- Broadcast timecode · 25 fps PAL ---------- */
+var tc = document.getElementById("tc");
+if(tc && !reduced){
+  var tcStart = performance.now();
+  function pad(n){ return n < 10 ? "0" + n : "" + n; }
+  (function tcLoop(now){
+    var totalF = Math.floor((now - tcStart) / 1000 * 25);
+    var f = totalF % 25,
+        s = Math.floor(totalF / 25) % 60,
+        m = Math.floor(totalF / 1500) % 60,
+        h = Math.floor(totalF / 90000) % 24;
+    tc.textContent = pad(h) + ":" + pad(m) + ":" + pad(s) + ":" + pad(f);
+    requestAnimationFrame(tcLoop);
+  })(performance.now());
+}
+
+/* ---------- Tilt + spotlight ---------- */
+function attachSpot(el){
+  el.addEventListener("mousemove", function(e){
+    var r = el.getBoundingClientRect();
+    el.style.setProperty("--mx", (e.clientX - r.left) + "px");
+    el.style.setProperty("--my", (e.clientY - r.top) + "px");
+  });
+}
+if(fine && !reduced){
+  document.querySelectorAll(".svc, .portrait, .pitem").forEach(attachSpot);
+  document.querySelectorAll(".tilt, .portrait").forEach(function(el){
+    var MAX = 3.5;
+    el.addEventListener("mousemove", function(e){
+      var r = el.getBoundingClientRect();
+      var dx = (e.clientX - r.left) / r.width - 0.5;
+      var dy = (e.clientY - r.top) / r.height - 0.5;
+      el.style.transform = "perspective(900px) rotateX(" + (-dy * MAX) + "deg) rotateY(" + (dx * MAX) + "deg)";
+    });
+    el.addEventListener("mouseleave", function(){
+      el.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg)";
+    });
+  });
+}
+
+/* ---------- Magnetic buttons ---------- */
+if(fine && !reduced){
+  document.querySelectorAll(".magnetic").forEach(function(el){
+    el.addEventListener("mousemove", function(e){
+      var r = el.getBoundingClientRect();
+      var dx = e.clientX - (r.left + r.width / 2);
+      var dy = e.clientY - (r.top + r.height / 2);
+      el.style.transform = "translate(" + dx * 0.22 + "px," + dy * 0.3 + "px)";
+    });
+    el.addEventListener("mouseleave", function(){
+      el.style.transition = "transform .5s cubic-bezier(0.16,1,0.3,1)";
+      el.style.transform = "translate(0,0)";
+      setTimeout(function(){ el.style.transition = ""; }, 500);
+    });
+  });
+}
+
+/* ---------- Portfolio filters ---------- */
+var fBtns = document.querySelectorAll(".pf-filters button");
+var items = document.querySelectorAll(".pitem");
+fBtns.forEach(function(btn){
+  btn.addEventListener("click", function(){
+    fBtns.forEach(function(b){ b.classList.remove("active"); });
+    btn.classList.add("active");
+    var f = btn.getAttribute("data-filter");
+    items.forEach(function(it){
+      var show = (f === "all" || it.getAttribute("data-cat") === f);
+      if(it._ft){ clearTimeout(it._ft); it._ft = null; }
+      if(show){
+        it.style.display = "";
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){ it.classList.remove("is-hidden"); });
+        });
+      }else{
+        it.classList.add("is-hidden");
+        it._ft = setTimeout(function(){
+          if(it.classList.contains("is-hidden")) it.style.display = "none";
+        }, 460);
+      }
+    });
   });
 });
 
-// TRANSLATIONS
-const t = {
-  en: {
-    nav_work:'Work', nav_about:'About', nav_services:'Services', nav_contact:'Contact',
-    hero_label:'Rome-based filmmaker',
-    hero_sub:'Broadcast · Corporate\nSocial · Documentary',
-    hero_cta:'View work', scroll:'Scroll',
-    reel_label:'Showreel', reel_year:'2026',
-    reel_bl:'Rome, Italy', reel_br:'10+ years broadcast',
-    about_sm:'About',
-    about_title:'The eye<br>behind the <em>frame.</em>',
-    about_p1:'Videomaker and filmmaker based in Rome. Ten years shooting for international broadcasters — RSI, SRF, RAI, RTL4, Antena 3. Stories told without borders, without language barriers.',
-    about_p2:'Every frame is a choice. Every cut is a declaration. Visual storytelling that travels the world without needing a translation.',
-    stat_years:'Years', stat_nets:'Networks', stat_lang:'Languages',
-    portrait_badge:'Available worldwide',
-    port_sm:'Selected work',
-    f_all:'All', f_bc:'Broadcast', f_co:'Corporate', f_so:'Social',
-    p1:'Rome Cultural Report', p2:'Urban Perspectives', p3:'Brand Film',
-    p4:'Roma Eterna', p5:'Golden Hour Roma', p6:'La Dolce Vita',
-    pt_bc:'Broadcast', pt_co:'Corporate · Brand', pt_so:'Social · Cinematic',
-    pc_corp:'Corporate Client', pc_soc:'Social Content',
-    srv_sm:'Services', srv_title:'What I<br><em>deliver.</em>',
-    s1n:'Broadcast & News', s1d:'Camera operator and editor for international TV networks. ENG shooting, live events, documentary. Rome-based, available worldwide.', s1p:'On request',
-    s2n:'Corporate Video', s2d:'Brand films, product videos, institutional content. Full production from concept to delivery. Tailored for international audiences.', s2p:'On request',
-    s3n:'Social Content', s3d:'Cinematic short-form for Instagram, TikTok, YouTube. Visual storytelling without language barriers — built to travel globally.', s3p:'On request',
-    ct_sm:'Contact', ck_base:'Base', ck_avail:'Available', cv_avail:'Worldwide',
-    fl_name:'Name', fl_co:'Company', fl_srv:'Service', fl_msg:'Message', fl_sub:'Send message',
-    fo_bc:'Broadcast & News', fo_co:'Corporate Video', fo_so:'Social Content', fo_ot:'Other',
-    s4n:'Aerial Footage', s4d:'Drone cinematography in natural and rural locations around Rome — Lazio coast, Castelli Romani, Appia Antica, countryside. 4K available.', s4p:'On request',
-  },
-  it: {
-    nav_work:'Lavori', nav_about:'Chi sono', nav_services:'Servizi', nav_contact:'Contatti',
-    hero_label:'Filmmaker romano',
-    hero_sub:'Broadcast · Corporate\nSocial · Documentario',
-    hero_cta:'Vedi i lavori', scroll:'Scorri',
-    reel_label:'Showreel', reel_year:'2026',
-    reel_bl:'Roma, Italia', reel_br:'10+ anni broadcast',
-    about_sm:'Chi sono',
-    about_title:"L'occhio<br>dietro al <em>frame.</em>",
-    about_p1:'Videomaker e filmmaker con base a Roma. Dieci anni di riprese per broadcaster internazionali — RSI, SRF, RAI, RTL4, Antena 3. Storie raccontate senza confini.',
-    about_p2:"Ogni inquadratura è una scelta. Ogni taglio è una dichiarazione. Storytelling visivo che viaggia nel mondo senza bisogno di traduzione.",
-    stat_years:'Anni', stat_nets:'Network', stat_lang:'Lingue',
-    portrait_badge:'Disponibile ovunque',
-    port_sm:'Lavori selezionati',
-    f_all:'Tutti', f_bc:'Broadcast', f_co:'Corporate', f_so:'Social',
-    p1:'Report Culturale Roma', p2:'Prospettive Urbane', p3:'Brand Film',
-    p4:'Roma Eterna', p5:'Golden Hour Roma', p6:'La Dolce Vita',
-    pt_bc:'Broadcast', pt_co:'Corporate · Brand', pt_so:'Social · Cinematografico',
-    pc_corp:'Cliente Corporate', pc_soc:'Contenuto Social',
-    srv_sm:'Servizi', srv_title:'Cosa<br><em>offro.</em>',
-    s1n:'Broadcast & News', s1d:'Operatore e montatore per network televisivi internazionali. Riprese ENG, eventi live, documentari. Base Roma, disponibile ovunque.', s1p:'Su richiesta',
-    s2n:'Video Corporate', s2d:'Brand film, video prodotto, contenuti istituzionali. Produzione completa dal concept alla consegna. Per pubblici internazionali.', s2p:'Su richiesta',
-    s3n:'Contenuti Social', s3d:'Short-form cinematografico per Instagram, TikTok, YouTube. Storytelling visivo senza barriere linguistiche — pensato per viaggiare.', s3p:'Su richiesta',
-    ct_sm:'Contatti', ck_base:'Base', ck_avail:'Disponibile', cv_avail:'Ovunque',
-    fl_name:'Nome', fl_co:'Azienda', fl_srv:'Servizio', fl_msg:'Messaggio', fl_sub:'Invia messaggio',
-    fo_bc:'Broadcast & News', fo_co:'Video Corporate', fo_so:'Contenuti Social', fo_ot:'Altro',
-    s4n:'Riprese Aeree', s4d:'Drone cinematografico in location naturali e rurali intorno a Roma — costa laziale, Castelli Romani, Appia Antica, campagna. 4K disponibile.', s4p:'Su richiesta',
-  },
-  es: {
-    nav_work:'Trabajo', nav_about:'Sobre mí', nav_services:'Servicios', nav_contact:'Contacto',
-    hero_label:'Cineasta con base en Roma',
-    hero_sub:'Broadcast · Corporativo\nSocial · Documental',
-    hero_cta:'Ver trabajo', scroll:'Scroll',
-    reel_label:'Showreel', reel_year:'2026',
-    reel_bl:'Roma, Italia', reel_br:'10+ años en broadcast',
-    about_sm:'Sobre mí',
-    about_title:'El ojo<br>detrás del <em>encuadre.</em>',
-    about_p1:'Videógrafo y cineasta con base en Roma. Diez años filmando para cadenas internacionales — RSI, SRF, RAI, RTL4, Antena 3. Historias sin fronteras.',
-    about_p2:'Cada plano es una decisión. Cada corte es una declaración. Narrativa visual que viaja por el mundo sin necesidad de traducción.',
-    stat_years:'Años', stat_nets:'Cadenas', stat_lang:'Idiomas',
-    portrait_badge:'Disponible mundialmente',
-    port_sm:'Trabajos seleccionados',
-    f_all:'Todos', f_bc:'Broadcast', f_co:'Corporativo', f_so:'Social',
-    p1:'Informe Cultural Roma', p2:'Perspectivas Urbanas', p3:'Brand Film',
-    p4:'Roma Eterna', p5:'Golden Hour Roma', p6:'La Dolce Vita',
-    pt_bc:'Broadcast', pt_co:'Corporativo · Marca', pt_so:'Social · Cinematográfico',
-    pc_corp:'Cliente Corporativo', pc_soc:'Contenido Social',
-    srv_sm:'Servicios', srv_title:'Lo que<br><em>ofrezco.</em>',
-    s1n:'Broadcast & Noticias', s1d:'Operador y editor para cadenas internacionales. Rodajes ENG, eventos en directo, documental. Base Roma, disponible en todo el mundo.', s1p:'Bajo presupuesto',
-    s2n:'Video Corporativo', s2d:'Brand films, videos de producto, contenido institucional. Producción completa desde el concepto hasta la entrega.', s2p:'Bajo presupuesto',
-    s3n:'Contenido Social', s3d:'Formato corto cinematográfico para Instagram, TikTok, YouTube. Narrativa visual sin barreras lingüísticas — diseñado para viajar.', s3p:'Bajo presupuesto',
-    ct_sm:'Contacto', ck_base:'Base', ck_avail:'Disponible', cv_avail:'En todo el mundo',
-    fl_name:'Nombre', fl_co:'Empresa', fl_srv:'Servicio', fl_msg:'Mensaje', fl_sub:'Enviar mensaje',
-    fo_bc:'Broadcast & Noticias', fo_co:'Video Corporativo', fo_so:'Contenido Social', fo_ot:'Otro',
-    s4n:'Imágenes Aéreas', s4d:'Cinematografía con dron en localizaciones naturales y rurales cerca de Roma — costa del Lacio, Castelli Romani, Via Appia, campo. 4K disponible.', s4p:'Bajo presupuesto',
-  }
-};
-
-function setLang(lang) {
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-  const tr = t[lang];
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const k = el.getAttribute('data-i18n');
-    if (tr[k] !== undefined) el.innerHTML = tr[k];
+/* ---------- Mobile menu ---------- */
+var burger = document.getElementById("burger");
+if(burger){
+  burger.addEventListener("click", function(){
+    document.body.classList.toggle("menu-open");
+  });
+  document.querySelectorAll("#mobileMenu a[href^='#']").forEach(function(a){
+    a.addEventListener("click", function(){ document.body.classList.remove("menu-open"); });
   });
 }
+
+/* ---------- Rome clock ---------- */
+var clock = document.getElementById("romeClock");
+function tickClock(){
+  if(!clock) return;
+  try{
+    clock.textContent = new Intl.DateTimeFormat("en-GB",
+      {timeZone:"Europe/Rome", hour:"2-digit", minute:"2-digit", second:"2-digit", hour12:false}
+    ).format(new Date());
+  }catch(e){
+    var d = new Date();
+    clock.textContent = ("0"+d.getHours()).slice(-2) + ":" + ("0"+d.getMinutes()).slice(-2) + ":" + ("0"+d.getSeconds()).slice(-2);
+  }
+}
+tickClock();
+setInterval(tickClock, 1000);
+
+/* ---------- Back to top ---------- */
+var toTop = document.getElementById("toTop");
+if(toTop) toTop.addEventListener("click", function(){
+  window.scrollTo({top:0, behavior: reduced ? "auto" : "smooth"});
+});
+
+/* ---------- Contact form → email ---------- */
+var form = document.getElementById("contactForm");
+if(form) form.addEventListener("submit", function(e){
+  e.preventDefault();
+  var name = document.getElementById("fName").value.trim();
+  var comp = document.getElementById("fCompany").value.trim();
+  var svc  = document.getElementById("fService").value;
+  var msg  = document.getElementById("fMsg").value.trim();
+  var subject = t[lang].mail_subject + " — " + svc;
+  var body = msg + "\n\n— " + (name || "") + (comp ? " · " + comp : "");
+  window.location.href = "mailto:manuele.pappagallo@gmail.com?subject=" +
+    encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+});
+
+/* ---------- Init ---------- */
+setLang(lang);
+onScroll();
+})();
 </script>
 </body>
 </html>
