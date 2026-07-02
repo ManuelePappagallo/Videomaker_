@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#06060a">
 <title>PAPPAGALLO — Visual Stories. No Words Needed.</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2220%22%20fill%3D%22%2306060a%22%2F%3E%3Cg%20transform%3D%22translate%2850%2050%29%20scale%280.1105%29%20translate%28-364%20-344%29%22%3E%3Cpath%20fill%3D%22%23b8975a%22%20d%3D%22M39%200Q62%201%2098.5%202.0Q135%203%20171%203Q219%203%20262.5%202.0Q306%201%20324%201Q451%201%20514.0%2056.0Q577%20111%20577%20198Q577%20234%20564.5%20273.5Q552%20313%20521.0%20346.5Q490%20380%20437.0%20401.0Q384%20422%20302%20422H204V402H292Q359%20402%20394.5%20375.0Q430%20348%20442.5%20304.0Q455%20260%20455%20209Q455%20114%20421.0%2067.0Q387%2020%20303%2020Q260%2020%20246.5%2037.0Q233%2054%20233%20106V600Q233%20637%20241.0%20655.5Q249%20674%20271.0%20680.0Q293%20686%20336%20687V708Q309%20706%20266.0%20705.5Q223%20705%20177%20705Q137%20705%20100.5%20705.5Q64%20706%2039%20708V688Q73%20686%2090.0%20680.0Q107%20674%20112.5%20656.0Q118%20638%20118%20602V106Q118%2069%20112.5%2051.5Q107%2034%2089.5%2027.5Q72%2021%2039%2020Z%22%2F%3E%3Cpath%20fill%3D%22%23b8975a%22%20d%3D%22M425%20211L305%20142L305%20280Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
 <meta name="description" content="Rome-based filmmaker and videomaker. Ten years shooting for international broadcasters — RSI, SRF, RAI, RTL4, Antena 3. Visual storytelling that travels the world.">
@@ -30,6 +31,7 @@
   --sans:'Outfit',sans-serif;
   --ease:cubic-bezier(0.16,1,0.3,1);
   --pad:56px;
+  --cbar:24px;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -44,6 +46,7 @@ body{
 }
 ::selection{background:var(--gold);color:var(--bg)}
 a{color:inherit}
+a,button{touch-action:manipulation}
 img,iframe{display:block}
 
 /* ---------- Custom cursor ---------- */
@@ -72,12 +75,13 @@ img,iframe{display:block}
 @media (pointer:fine){ #cur,#curRing{display:flex} }
 
 /* ---------- Film grain ---------- */
-.grain{
-  position:fixed;inset:-100%;width:300%;height:300%;pointer-events:none;z-index:1200;
+.hero::after,#preloader::after{
+  content:'';position:absolute;inset:-60%;width:220%;height:220%;pointer-events:none;z-index:1;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  opacity:.045;
+  opacity:.05;
   animation:grain 7s steps(10) infinite;
 }
+#preloader::after{opacity:.065}
 @keyframes grain{
   0%,100%{transform:translate(0,0)} 10%{transform:translate(-5%,-8%)}
   20%{transform:translate(-12%,3%)} 30%{transform:translate(6%,-10%)}
@@ -97,9 +101,9 @@ img,iframe{display:block}
 #preloader{
   position:fixed;inset:0;z-index:2100;background:var(--bg);
   display:flex;align-items:center;justify-content:center;
-  transition:opacity .6s ease,visibility .6s;
+  transition:opacity .65s ease,visibility .65s,filter .65s ease,transform .65s ease;
 }
-#preloader.done{opacity:0;visibility:hidden}
+#preloader.done{opacity:0;visibility:hidden;filter:blur(14px);transform:scale(1.05)}
 .pl-cross-h,.pl-cross-v{position:absolute;background:rgba(255,255,255,.05)}
 .pl-cross-h{left:0;right:0;top:50%;height:1px}
 .pl-cross-v{top:0;bottom:0;left:50%;width:1px}
@@ -137,11 +141,13 @@ img,iframe{display:block}
 .curtain.bottom{bottom:0;transform-origin:bottom}
 body.revealed .curtain.top{transform:translateY(-101%)}
 body.revealed .curtain.bottom{transform:translateY(101%)}
+body.revealed.cinema .curtain.top{transform:translateY(calc(-100% + var(--cbar)))}
+body.revealed.cinema .curtain.bottom{transform:translateY(calc(100% - var(--cbar)))}
 
 /* ---------- Nav ---------- */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:1600;
-  padding:30px var(--pad);display:flex;align-items:center;justify-content:space-between;
+  padding:30px max(var(--pad),env(safe-area-inset-right)) 30px max(var(--pad),env(safe-area-inset-left));display:flex;align-items:center;justify-content:space-between;
   transition:padding .45s var(--ease),background .45s,backdrop-filter .45s;
 }
 nav::before{
@@ -242,7 +248,7 @@ body.menu-open .mm-foot{opacity:1}
 .hero-video .vwrap{position:absolute;inset:0;will-change:transform}
 .hero-video iframe{
   position:absolute;top:50%;left:50%;
-  width:177.78vh;min-width:100%;height:100vh;min-height:56.25vw;
+  width:177.78svh;min-width:100%;height:100svh;min-height:56.25vw;
   transform:translate(-50%,-50%);border:0;
 }
 .hero-shade{
@@ -337,8 +343,7 @@ body.revealed .hero-scroll{animation:fadeIn 1.2s ease 1.5s forwards}
   border-top:1px solid var(--border);border-bottom:1px solid var(--border);
   padding:26px 0;overflow:hidden;position:relative;background:var(--bg);
 }
-.mq-track{display:flex;width:max-content;animation:mq 30s linear infinite}
-.marquee:hover .mq-track{animation-play-state:paused}
+.mq-track{display:flex;width:max-content;will-change:transform}
 .mq-group{display:flex;align-items:center;flex-shrink:0}
 .mq-item{
   font-family:var(--serif);font-style:italic;font-weight:400;
@@ -347,7 +352,6 @@ body.revealed .hero-scroll{animation:fadeIn 1.2s ease 1.5s forwards}
 }
 .mq-item:hover{color:rgba(184,151,90,.55)}
 .mq-sep{color:rgba(184,151,90,.35);font-size:11px}
-@keyframes mq{to{transform:translateX(-50%)}}
 
 /* ---------- Section scaffolding ---------- */
 section{padding:120px var(--pad);position:relative}
@@ -357,11 +361,24 @@ section{padding:120px var(--pad);position:relative}
 .divider{height:1px;background:var(--border);margin:0 var(--pad);position:relative}
 .divider::before{content:'';position:absolute;left:0;top:0;height:1px;width:80px;
   background:linear-gradient(90deg,var(--gold),transparent)}
+.divider::after{content:'';position:absolute;top:0;left:-18%;height:1px;width:16%;opacity:0;
+  background:linear-gradient(90deg,transparent,var(--gold-light),transparent)}
+.divider.lit::after{animation:dsweep 1.5s var(--ease) forwards}
+@keyframes dsweep{0%{left:-18%;opacity:0}12%{opacity:1}100%{left:102%;opacity:0}}
 .h2{
   font-family:var(--serif);font-weight:400;letter-spacing:-1px;
   font-size:clamp(40px,5vw,72px);line-height:1.05;
 }
 .h2 em{font-style:italic;color:var(--gold)}
+
+@property --ab{syntax:'<number>';initial-value:0;inherits:true}
+body{transition:--ab .38s ease-out}
+@media (pointer:fine){
+  body.ab-on .hero-headline,body.ab-on .h2{
+    text-shadow:calc(var(--ab)*1px) 0 0 rgba(255,70,70,.5),
+                calc(var(--ab)*-1px) 0 0 rgba(70,190,255,.5);
+  }
+}
 
 /* Reveal on scroll */
 .reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
@@ -369,14 +386,20 @@ section{padding:120px var(--pad);position:relative}
 .reveal[data-delay="1"]{transition-delay:.1s}
 .reveal[data-delay="2"]{transition-delay:.2s}
 .reveal[data-delay="3"]{transition-delay:.3s}
+.reveal.rc{transform:none;clip-path:inset(0 0 102% 0);transition:opacity .9s var(--ease),clip-path 1.15s var(--ease)}
+.reveal.rc.visible{clip-path:inset(-4% 0 -12% 0)}
 
 /* ---------- Showreel ---------- */
 .reel{position:relative;margin-bottom:3px}
-.reel-clip{
-  position:relative;padding-top:56.25%;overflow:hidden;background:var(--bg2);
-  clip-path:inset(7% 5% 7% 5%);transition:clip-path 1.3s var(--ease);
+.reel-clip{position:relative;padding-top:56.25%;overflow:hidden;background:var(--bg2)}
+.mosaic{position:absolute;inset:0;z-index:6;pointer-events:none;perspective:1000px}
+.mtile{
+  position:absolute;background:#07070c;
+  box-shadow:inset 0 0 0 1px rgba(184,151,90,.05);
+  transform-origin:50% 0;
+  transition:transform .75s var(--ease),opacity .75s var(--ease);
 }
-.reel.visible .reel-clip{clip-path:inset(0 0 0 0)}
+.reel.visible .mtile{transform:rotateX(-96deg);opacity:0}
 .reel-clip iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
 .reel-tag{
   position:absolute;font-size:9px;letter-spacing:2px;color:var(--muted);
@@ -464,13 +487,16 @@ section{padding:120px var(--pad);position:relative}
 
 .pgrid{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;perspective:1400px}
 .pitem{
-  position:relative;overflow:hidden;background:var(--bg2);
+  position:relative;overflow:hidden;background:var(--bg2);opacity:0;
   transition:opacity .45s var(--ease),transform .45s var(--ease);
-  transform-style:preserve-3d;will-change:transform;
+  transform-style:preserve-3d;
 }
 .pitem.span8{grid-column:span 8;aspect-ratio:16/9}
 .pitem.span4{grid-column:span 4;aspect-ratio:3/4}
 .pitem.span6{grid-column:span 6;aspect-ratio:16/9}
+.pitem.pop{animation:popIn .9s var(--ease) both}
+.pitem.shown{opacity:1}
+@keyframes popIn{from{opacity:0;transform:translateY(34px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 .pitem.is-hidden{opacity:0;transform:scale(.96);pointer-events:none}
 .pitem-bg{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
@@ -550,7 +576,11 @@ section{padding:120px var(--pad);position:relative}
   padding:14px 0;outline:none;width:100%;border-radius:0;
 }
 .field textarea{resize:none;min-height:110px}
-.field select{appearance:none}
+.field select{
+  appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23b8975a' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 4px center;padding-right:24px;
+}
 .field option{background:var(--bg);color:var(--text)}
 .field .fline{
   position:absolute;bottom:0;left:0;height:1px;width:100%;background:var(--gold);
@@ -594,11 +624,25 @@ footer{
   .pitem.span8,.pitem.span4,.pitem.span6{grid-column:span 12}
   .pitem.span4{aspect-ratio:3/4}
 }
+@media (hover:none){
+  .pitem-overlay{
+    opacity:1;
+    background:linear-gradient(to top,rgba(6,6,10,.88),transparent 52%);
+  }
+  .pitem-client,.pitem-title,.pitem-type{transform:none}
+  .pitem-num{color:rgba(184,151,90,.5)}
+  .svc::before{transform:scaleX(1);opacity:.45}
+}
 @media(max-width:640px){
-  :root{--pad:24px}
+  :root{--pad:24px;--cbar:14px}
   section{padding-top:88px;padding-bottom:88px}
-  .hero-bottom{flex-direction:column;align-items:flex-start;gap:28px;padding-bottom:84px}
-  .hero-headline{letter-spacing:-2px}
+  .hero-content{padding-top:120px}
+  .hero-headline{font-size:clamp(54px,15vw,92px);letter-spacing:-2px}
+  .hero-bottom{flex-direction:column;align-items:flex-start;gap:28px;padding-bottom:56px}
+  .hero-scroll{display:none}
+  .mq-item{padding:0 24px}
+  .stat-num{font-size:40px}
+  .field input,.field select,.field textarea{font-size:16px}
   .reel-tag{font-size:8px;padding:4px 7px}
   .reel-tag.bl,.reel-tag.br{display:none}
   .manifesto{padding-top:110px;padding-bottom:110px}
@@ -615,9 +659,10 @@ footer{
   .hero-label,.hero-meta,.hero-cta-wrap,.hero-scroll{opacity:1!important}
   .hl{transform:none!important}
   .reveal{opacity:1!important;transform:none!important}
-  .reel-clip{clip-path:inset(0 0 0 0)!important}
+  .mosaic{display:none!important}
+  .pitem{opacity:1!important}
   .manifesto .w{opacity:1!important}
-  .grain{display:none}
+  .hero::after,#preloader::after{display:none!important}
 }
 </style>
 </head>
@@ -647,7 +692,6 @@ footer{
 <div class="curtain bottom"></div>
 
 <div id="progress"></div>
-<div class="grain" aria-hidden="true"></div>
 <div id="cur"></div>
 <div id="curRing"><span id="curLabel">View</span></div>
 
@@ -756,7 +800,7 @@ Social · Documentary</div>
     <span class="sec-label" data-i18n="sec_reel">Showreel</span>
   </div>
 
-  <div class="reel reveal" data-cursor="view">
+  <div class="reel" data-cursor="view">
     <div class="reel-clip">
       <iframe src="https://player.vimeo.com/video/1190618718?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
         allow="autoplay; fullscreen; picture-in-picture" title="St. Peter's Dome — Rome"></iframe>
@@ -772,7 +816,7 @@ Social · Documentary</div>
     <span>25 fps · PAL · Rome</span>
   </div>
 
-  <div class="reel reveal" data-cursor="view">
+  <div class="reel" data-cursor="view">
     <div class="reel-clip">
       <iframe loading="lazy" src="https://player.vimeo.com/video/1190616900?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
         allow="autoplay; fullscreen; picture-in-picture" title="Vatican — Rome"></iframe>
@@ -783,7 +827,7 @@ Social · Documentary</div>
     </div>
   </div>
 
-  <div class="reel reveal" data-cursor="view" style="margin-top:3px">
+  <div class="reel" data-cursor="view" style="margin-top:3px">
     <div class="reel-clip">
       <iframe loading="lazy" src="https://player.vimeo.com/video/1190614015?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
         allow="autoplay; fullscreen; picture-in-picture" title="Aerial Timelapse 4K"></iframe>
@@ -811,7 +855,7 @@ Social · Documentary</div>
       <span class="sec-num">II.</span>
       <span class="sec-label" data-i18n="sec_about">About</span>
     </div>
-    <h2 class="h2 reveal" style="margin-bottom:40px">
+    <h2 class="h2 reveal rc" style="margin-bottom:40px">
       <span data-i18n="about_h1">The eye</span><br>
       <span data-i18n="about_h2">behind the</span> <em data-i18n="about_h3">frame.</em>
     </h2>
@@ -864,7 +908,7 @@ Social · Documentary</div>
     </div>
   </div>
 
-  <div class="pgrid reveal" id="pgrid">
+  <div class="pgrid" id="pgrid">
     <div class="pitem span8 tilt" data-cat="broadcast" data-cursor="view">
       <div class="pitem-bg"><div class="pitem-wm">RSI · 2026</div></div>
       <div class="pitem-spot"></div>
@@ -941,7 +985,7 @@ Social · Documentary</div>
     <span class="sec-num">IV.</span>
     <span class="sec-label" data-i18n="sec_services">Services</span>
   </div>
-  <h2 class="h2 reveal"><span data-i18n="svc_h1">What I</span><br><em data-i18n="svc_h2">deliver.</em></h2>
+  <h2 class="h2 reveal rc"><span data-i18n="svc_h1">What I</span><br><em data-i18n="svc_h2">deliver.</em></h2>
 
   <div class="svc-grid">
     <div class="svc reveal spot">
@@ -980,7 +1024,7 @@ Social · Documentary</div>
       <span class="sec-num">V.</span>
       <span class="sec-label" data-i18n="sec_contact">Contact</span>
     </div>
-    <h2 class="h2 reveal" style="margin-bottom:52px">
+    <h2 class="h2 reveal rc" style="margin-bottom:52px">
       <span data-i18n="c_h1">Let's make</span><br>
       <span data-i18n="c_h2">something</span><br>
       <em data-i18n="c_h3">unforgettable.</em>
@@ -1235,7 +1279,6 @@ function killIntro(){
   if(pre) pre.classList.add("done");
   setTimeout(function(){
     if(pre && pre.parentNode) pre.parentNode.removeChild(pre);
-    for(var i=0;i<curtains.length;i++){ curtains[i].style.display = "none"; }
   }, 1400);
 }
 if(reduced){
@@ -1295,6 +1338,9 @@ if(fine && !reduced){
 var nav = document.getElementById("nav");
 var bar = document.getElementById("progress");
 var vwrap = document.getElementById("heroVwrap");
+var heroFx = (fine && !reduced) ? [document.querySelector(".hero-content"), document.querySelector(".hero-bottom")] : null;
+var abT = null, lastYab = window.scrollY;
+var reel1 = document.querySelector(".reel-clip");
 var ticking = false;
 function onScroll(){
   if(ticking) return;
@@ -1306,6 +1352,30 @@ function onScroll(){
     if(nav) nav.classList.toggle("scrolled", y > 60);
     if(vwrap && fine && !reduced && y < winH * 1.2){
       vwrap.style.transform = "translateY(" + (y * 0.22) + "px)";
+    }
+    if(heroFx && y < winH * 1.1){
+      var ho = Math.max(0, 1 - y / (winH * 0.7));
+      heroFx[0].style.transform = "translateY(" + (y * 0.32) + "px)";
+      heroFx[0].style.opacity = ho;
+      heroFx[1].style.transform = "translateY(" + (y * 0.18) + "px)";
+      heroFx[1].style.opacity = ho;
+    }
+    if(fine && !reduced){
+      var dyA = Math.min(Math.abs(y - lastYab), 90);
+      lastYab = y;
+      if(dyA > 2){
+        document.body.classList.add("ab-on");
+        document.body.style.setProperty("--ab", Math.min(dyA * 0.055, 3.2).toFixed(2));
+        if(abT) clearTimeout(abT);
+        abT = setTimeout(function(){ document.body.style.setProperty("--ab", 0); }, 140);
+      }
+      if(reel1){
+        var rr = reel1.getBoundingClientRect();
+        if(rr.bottom > 0 && rr.top < winH){
+          var pz = 1 - Math.max(0, Math.min(1, (rr.top - winH * 0.1) / (winH * 0.6)));
+          reel1.style.transform = "scale(" + (0.94 + 0.06 * pz).toFixed(4) + ")";
+        }
+      }
     }
     applyManifesto();
     ticking = false;
@@ -1328,7 +1398,16 @@ function applyManifesto(){
 /* ---------- Reveal on scroll ---------- */
 var io = new IntersectionObserver(function(entries){
   entries.forEach(function(en){
-    if(en.isIntersecting){ en.target.classList.add("visible"); io.unobserve(en.target); }
+    if(en.isIntersecting){
+      en.target.classList.add("visible");
+      io.unobserve(en.target);
+      if(en.target.classList.contains("reel")){
+        setTimeout(function(){
+          var m = en.target.querySelector(".mosaic");
+          if(m && m.parentNode) m.parentNode.removeChild(m);
+        }, 1800);
+      }
+    }
   });
 }, {threshold:0.15});
 document.querySelectorAll(".reveal, .reel").forEach(function(el){ io.observe(el); });
@@ -1358,9 +1437,10 @@ document.querySelectorAll(".stat-num").forEach(function(el){ cio.observe(el); })
 /* ---------- Broadcast timecode · 25 fps PAL ---------- */
 var tc = document.getElementById("tc");
 if(tc && !reduced){
-  var tcStart = performance.now();
+  var tcStart = performance.now(), tcOn = false;
   function pad(n){ return n < 10 ? "0" + n : "" + n; }
-  (function tcLoop(now){
+  function tcLoop(now){
+    if(!tcOn) return;
     var totalF = Math.floor((now - tcStart) / 1000 * 25);
     var f = totalF % 25,
         s = Math.floor(totalF / 25) % 60,
@@ -1368,7 +1448,12 @@ if(tc && !reduced){
         h = Math.floor(totalF / 90000) % 24;
     tc.textContent = pad(h) + ":" + pad(m) + ":" + pad(s) + ":" + pad(f);
     requestAnimationFrame(tcLoop);
-  })(performance.now());
+  }
+  new IntersectionObserver(function(es){
+    var vis = es[0].isIntersecting;
+    if(vis && !tcOn){ tcOn = true; requestAnimationFrame(tcLoop); }
+    else if(!vis){ tcOn = false; }
+  }).observe(tc);
 }
 
 /* ---------- Tilt + spotlight ---------- */
@@ -1485,7 +1570,101 @@ if(form) form.addEventListener("submit", function(e){
     encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
 });
 
+/* ---------- Cinemascope bars ---------- */
+(function(){
+  if(reduced) return;
+  var reels = document.querySelectorAll(".reel");
+  if(!reels.length) return;
+  function recount(){
+    var n = 0;
+    for(var i = 0; i < reels.length; i++) if(reels[i]._cin) n++;
+    document.body.classList.toggle("cinema", n > 0);
+  }
+  var co = new IntersectionObserver(function(es){
+    es.forEach(function(en){ en.target._cin = en.isIntersecting; });
+    recount();
+  }, {threshold:0.45});
+  reels.forEach(function(r){ co.observe(r); });
+})();
+
+/* ---------- Divider light sweep ---------- */
+var dio = new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(en.isIntersecting){ en.target.classList.add("lit"); dio.unobserve(en.target); }
+  });
+}, {threshold:0.9});
+document.querySelectorAll(".divider").forEach(function(d){ dio.observe(d); });
+
+/* ---------- Mosaic builder ---------- */
+function buildMosaic(){
+  if(reduced) return;
+  document.querySelectorAll(".reel-clip").forEach(function(clip){
+    var grid = document.createElement("div");
+    grid.className = "mosaic";
+    var small = window.innerWidth < 700;
+    var C = small ? 6 : 10, R = small ? 4 : 5, step = small ? 62 : 48;
+    for(var r = 0; r < R; r++){
+      for(var c = 0; c < C; c++){
+        var tile = document.createElement("div");
+        tile.className = "mtile";
+        tile.style.left = (c * 100 / C) + "%";
+        tile.style.top = (r * 100 / R) + "%";
+        tile.style.width = (100 / C + 0.2) + "%";
+        tile.style.height = (100 / R + 0.2) + "%";
+        tile.style.transitionDelay = ((r * 0.6 + c) * step + Math.random() * 34).toFixed(0) + "ms";
+        grid.appendChild(tile);
+      }
+    }
+    clip.appendChild(grid);
+  });
+}
+
+/* ---------- Portfolio cascade ---------- */
+var pio = new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(!en.isIntersecting) return;
+    pio.unobserve(en.target);
+    var el = en.target;
+    if(reduced){ el.classList.add("shown"); return; }
+    el.style.animationDelay = ((el._pi % 3) * 90 + Math.floor(el._pi / 3) * 70) + "ms";
+    el.classList.add("pop");
+    el.addEventListener("animationend", function h(){
+      el.classList.remove("pop");
+      el.style.animationDelay = "";
+      el.classList.add("shown");
+      el.removeEventListener("animationend", h);
+    });
+  });
+}, {threshold:0.12});
+document.querySelectorAll(".pitem").forEach(function(el, i){ el._pi = i; pio.observe(el); });
+
+/* ---------- Marquee · velocity-driven ---------- */
+(function(){
+  var tr = document.querySelector(".mq-track");
+  var wrap = document.querySelector(".marquee");
+  if(!tr || !wrap || reduced) return;
+  var x = 0, vel = 0, lastY = window.scrollY, half = 0, running = false;
+  function mql(){
+    if(!running) return;
+    var y = window.scrollY;
+    var dy = Math.min(Math.abs(y - lastY), 80);
+    lastY = y;
+    vel += (dy - vel) * 0.06;
+    if(half < 10) half = tr.scrollWidth / 2;
+    x -= 0.85 + vel * 0.12;
+    if(-x >= half) x += half;
+    tr.style.transform = "translate3d(" + x + "px,0,0)";
+    requestAnimationFrame(mql);
+  }
+  new IntersectionObserver(function(es){
+    var vis = es[0].isIntersecting;
+    if(vis && !running){ running = true; lastY = window.scrollY; requestAnimationFrame(mql); }
+    else if(!vis){ running = false; }
+  }).observe(wrap);
+})();
+
 /* ---------- Init ---------- */
+buildMosaic();
 setLang(lang);
 onScroll();
 })();
