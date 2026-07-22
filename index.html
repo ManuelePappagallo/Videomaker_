@@ -402,7 +402,18 @@ body.ab-on .hero-headline,body.ab-on .h2{
   transition:transform .75s var(--ease),opacity .75s var(--ease);
 }
 .reel.visible .mtile{transform:rotateX(-96deg);opacity:0}
-.reel-clip iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.reel-clip iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;z-index:1}
+.reel-poster{
+  position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;
+  z-index:2;transition:opacity 1.1s ease;background:var(--bg2);
+}
+.reel-poster.gone{opacity:0}
+.hero-poster{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  transition:opacity 1.2s ease;
+}
+.hero-poster.gone{opacity:0}
+.hero-video .vwrap{z-index:1}
 .reel-tag{
   position:absolute;font-size:9px;letter-spacing:2px;color:var(--muted);
   background:rgba(6,6,10,.55);padding:5px 9px;z-index:5;pointer-events:none;
@@ -749,6 +760,7 @@ footer{
 <!-- HERO -->
 <section class="hero" style="padding:0">
   <div class="hero-video">
+    <img class="hero-poster" id="heroPoster" src="reel-cupola.jpg" alt="" aria-hidden="true" fetchpriority="high">
     <div class="vwrap" id="heroVwrap">
       <iframe src="https://player.vimeo.com/video/1190618718?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
         allow="autoplay; fullscreen; picture-in-picture" title="St. Peter's Dome — Rome"></iframe>
@@ -814,7 +826,8 @@ Social · Documentary</div>
   <div class="reel" data-cursor="view">
     <div class="reel-clip">
       <iframe data-src="https://player.vimeo.com/video/1190618718?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
-        allow="autoplay; fullscreen; picture-in-picture" title="St. Peter's Dome — Rome"></iframe>
+        allow="autoplay; fullscreen; picture-in-picture" title="St. Peter's Dome — Rome">></iframe>
+      <img class="reel-poster" src="reel-cupola.jpg" alt="" aria-hidden="true" fetchpriority="high">
       <span class="reel-tag tl">4K · Cinematic</span>
       <span class="reel-tag tr">PAPPAGALLO</span>
       <span class="reel-tag bl">St. Peter's Dome · Rome</span>
@@ -830,7 +843,8 @@ Social · Documentary</div>
   <div class="reel" data-cursor="view">
     <div class="reel-clip">
       <iframe data-src="https://player.vimeo.com/video/1190616900?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
-        allow="autoplay; fullscreen; picture-in-picture" title="Vatican — Rome"></iframe>
+        allow="autoplay; fullscreen; picture-in-picture" title="Vatican — Rome">></iframe>
+      <img class="reel-poster" src="reel-vaticano.jpg" alt="" aria-hidden="true" loading="lazy">
       <span class="reel-tag tl">4K · Cinematic</span>
       <span class="reel-tag tr">PAPPAGALLO</span>
       <span class="reel-tag bl">Vatican · Rome</span>
@@ -841,7 +855,8 @@ Social · Documentary</div>
   <div class="reel" data-cursor="view" style="margin-top:3px">
     <div class="reel-clip">
       <iframe data-src="https://player.vimeo.com/video/1190614015?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
-        allow="autoplay; fullscreen; picture-in-picture" title="Aerial Timelapse 4K"></iframe>
+        allow="autoplay; fullscreen; picture-in-picture" title="Aerial Timelapse 4K">></iframe>
+      <img class="reel-poster" src="reel-drone.jpg" alt="" aria-hidden="true" loading="lazy">
       <span class="reel-tag tl">4K · Timelapse · Drone</span>
       <span class="reel-tag tr">PAPPAGALLO</span>
       <span class="reel-tag bl">Salto di Fondi · Lazio</span>
@@ -1790,6 +1805,17 @@ document.querySelectorAll(".pitem").forEach(function(el, i){ el._pi = i; pio.obs
   vids.forEach(function(v){ vio.observe(v); });
 })();
 
+/* ---------- Hero: poster fino al primo fotogramma ---------- */
+(function(){
+  var hp = document.getElementById("heroPoster");
+  var hf = document.querySelector(".hero-video iframe");
+  if(!hp || !hf) return;
+  function drop(){ setTimeout(function(){ hp.classList.add("gone"); }, 1500); }
+  if(hf.complete) drop();
+  hf.addEventListener("load", drop, {once:true});
+  setTimeout(drop, 6000);
+})();
+
 /* ---------- Showreel: player caricati just-in-time ---------- */
 (function(){
   var frames = document.querySelectorAll(".reel-clip iframe[data-src]");
@@ -1808,7 +1834,11 @@ document.querySelectorAll(".pitem").forEach(function(el, i){ el._pi = i; pio.obs
       done = true; busy = false;
       setTimeout(pump, 260);
     }
-    f.addEventListener("load", next, {once:true});
+    f.addEventListener("load", function(){
+      var po = f.parentNode.querySelector(".reel-poster");
+      if(po) setTimeout(function(){ po.classList.add("gone"); }, 1400);
+      next();
+    }, {once:true});
     setTimeout(next, 2500);
   }
 
