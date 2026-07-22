@@ -7,6 +7,9 @@
 <title>PAPPAGALLO — Visual Stories. No Words Needed.</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2220%22%20fill%3D%22%2306060a%22%2F%3E%3Cg%20transform%3D%22translate%2850%2050%29%20scale%280.1105%29%20translate%28-364%20-344%29%22%3E%3Cpath%20fill%3D%22%23b8975a%22%20d%3D%22M39%200Q62%201%2098.5%202.0Q135%203%20171%203Q219%203%20262.5%202.0Q306%201%20324%201Q451%201%20514.0%2056.0Q577%20111%20577%20198Q577%20234%20564.5%20273.5Q552%20313%20521.0%20346.5Q490%20380%20437.0%20401.0Q384%20422%20302%20422H204V402H292Q359%20402%20394.5%20375.0Q430%20348%20442.5%20304.0Q455%20260%20455%20209Q455%20114%20421.0%2067.0Q387%2020%20303%2020Q260%2020%20246.5%2037.0Q233%2054%20233%20106V600Q233%20637%20241.0%20655.5Q249%20674%20271.0%20680.0Q293%20686%20336%20687V708Q309%20706%20266.0%20705.5Q223%20705%20177%20705Q137%20705%20100.5%20705.5Q64%20706%2039%20708V688Q73%20686%2090.0%20680.0Q107%20674%20112.5%20656.0Q118%20638%20118%20602V106Q118%2069%20112.5%2051.5Q107%2034%2089.5%2027.5Q72%2021%2039%2020Z%22%2F%3E%3Cpath%20fill%3D%22%23b8975a%22%20d%3D%22M425%20211L305%20142L305%20280Z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
 <meta name="description" content="Rome-based filmmaker and videomaker. Ten years shooting for international broadcasters — RSI, SRF, RAI, RTL4, Antena 3. Visual storytelling that travels the world.">
+<link rel="preconnect" href="https://player.vimeo.com">
+<link rel="preconnect" href="https://i.vimeocdn.com">
+<link rel="preconnect" href="https://f.vimeocdn.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -1291,7 +1294,7 @@ function killIntro(){
   if(pre) pre.classList.add("done");
   setTimeout(function(){
     if(pre && pre.parentNode) pre.parentNode.removeChild(pre);
-  }, 1400);
+  }, 1200);
 }
 if(reduced){
   if(pre) pre.style.display = "none";
@@ -1300,7 +1303,7 @@ if(reduced){
 }else{
   var arc = document.getElementById("plArc");
   var cnt = document.getElementById("plCount");
-  var DUR = 1800, CIRC = 301.6, t0 = null;
+  var DUR = 1150, CIRC = 301.6, t0 = null;
   function leader(ts){
     if(t0 === null) t0 = ts;
     var p = Math.min((ts - t0) / DUR, 1);
@@ -1310,7 +1313,7 @@ if(reduced){
       if(cnt.textContent !== String(n)) cnt.textContent = n;
     }
     if(p < 1){ requestAnimationFrame(leader); }
-    else{ setTimeout(killIntro, 180); }
+    else{ setTimeout(killIntro, 120); }
   }
   requestAnimationFrame(leader);
   setTimeout(function(){ if(!document.body.classList.contains("revealed")) killIntro(); }, 4500);
