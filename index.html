@@ -813,7 +813,7 @@ Social · Documentary</div>
 
   <div class="reel" data-cursor="view">
     <div class="reel-clip">
-      <iframe src="https://player.vimeo.com/video/1190618718?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
+      <iframe data-src="https://player.vimeo.com/video/1190618718?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
         allow="autoplay; fullscreen; picture-in-picture" title="St. Peter's Dome — Rome"></iframe>
       <span class="reel-tag tl">4K · Cinematic</span>
       <span class="reel-tag tr">PAPPAGALLO</span>
@@ -829,7 +829,7 @@ Social · Documentary</div>
 
   <div class="reel" data-cursor="view">
     <div class="reel-clip">
-      <iframe loading="lazy" src="https://player.vimeo.com/video/1190616900?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
+      <iframe data-src="https://player.vimeo.com/video/1190616900?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
         allow="autoplay; fullscreen; picture-in-picture" title="Vatican — Rome"></iframe>
       <span class="reel-tag tl">4K · Cinematic</span>
       <span class="reel-tag tr">PAPPAGALLO</span>
@@ -840,7 +840,7 @@ Social · Documentary</div>
 
   <div class="reel" data-cursor="view" style="margin-top:3px">
     <div class="reel-clip">
-      <iframe loading="lazy" src="https://player.vimeo.com/video/1190614015?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
+      <iframe data-src="https://player.vimeo.com/video/1190614015?title=0&byline=0&portrait=0&badge=0&autopause=0&autoplay=1&muted=1&loop=1&background=1"
         allow="autoplay; fullscreen; picture-in-picture" title="Aerial Timelapse 4K"></iframe>
       <span class="reel-tag tl">4K · Timelapse · Drone</span>
       <span class="reel-tag tr">PAPPAGALLO</span>
@@ -1788,6 +1788,47 @@ document.querySelectorAll(".pitem").forEach(function(el, i){ el._pi = i; pio.obs
     });
   }, {threshold:0.25, rootMargin:"140px 0px"});
   vids.forEach(function(v){ vio.observe(v); });
+})();
+
+/* ---------- Showreel: player caricati just-in-time ---------- */
+(function(){
+  var frames = document.querySelectorAll(".reel-clip iframe[data-src]");
+  if(!frames.length) return;
+  var queue = [], busy = false;
+
+  function pump(){
+    if(busy || !queue.length) return;
+    busy = true;
+    var f = queue.shift();
+    if(!f.getAttribute("src")) f.src = f.dataset.src;
+    // un player alla volta: il successivo parte quando questo ha finito o dopo 2.5s
+    var done = false;
+    function next(){
+      if(done) return;
+      done = true; busy = false;
+      setTimeout(pump, 260);
+    }
+    f.addEventListener("load", next, {once:true});
+    setTimeout(next, 2500);
+  }
+
+  var fio = new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(!en.isIntersecting) return;
+      fio.unobserve(en.target);
+      queue.push(en.target);
+      pump();
+    });
+  }, {rootMargin: "350px 0px"});
+
+  // niente parte prima che hero e pagina siano in piedi
+  function arm(){
+    setTimeout(function(){
+      frames.forEach(function(f){ fio.observe(f); });
+    }, 900);
+  }
+  if(document.readyState === "complete") arm();
+  else window.addEventListener("load", arm, {once:true});
 })();
 
 /* ---------- Init ---------- */
